@@ -1,0 +1,6 @@
+theme = Aura
+font-size = 16
+
+window-padding-balance = true
+macos-option-as-alt = true
+keybind = cmd+backspace=esc:w
