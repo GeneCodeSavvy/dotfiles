@@ -1,0 +1,20 @@
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.relativenumber = true
+vim.opt.number = true
+vim.opt.scrollbind = true
+vim.opt.wrap = false
+vim.opt.spelllang = "en"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.scrolloff = 999
+vim.opt.virtualedit = "block"
+vim.opt.inccommand = "split"
+vim.opt.termguicolors = true
+vim.opt.ignorecase = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.signcolumn = "yes"
+
+vim.g.mapleader = " "
