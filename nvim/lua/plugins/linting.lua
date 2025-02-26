@@ -5,8 +5,11 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local lint = require("lint")
+			-- local util = require("lint.util")
+			-- Set linters
 			lint.linters_by_ft = {
 				markdown = { "markdownlint" },
+				python = { "pylint" },
 			}
 
 			-- To allow other plugins to add linters to require('lint').linters_by_ft,
