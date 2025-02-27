@@ -25,7 +25,7 @@ vim.keymap.set("n", "<leader>5", "<cmd>:buffer 5<CR>", { desc = "Move to buffer 
 
 -- Move lines up and down
 vim.keymap.set({ "n", "v" }, "<A-j>", "<cmd>:m .+1<CR>==", { desc = "Move the current line down" })
-vim.keymap.set({ "n", "v" }, "<A-k>", "<cmd>:m .-2<CR>==", { desc = "Move the current line up" })
+vim.keymap.set("n", "<A-k>", "<cmd>:m .-2<CR>==", { desc = "Move the current line up" })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
