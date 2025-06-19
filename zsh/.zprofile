@@ -17,9 +17,6 @@ typeset -U -a path
 path=(
   "$HOME/.local/bin"
 
-  # Python from Homebrew
-  "$brew_prefix/opt/python@3.13/libexec/bin"
-
   # Go tools
   "$HOME/go/bin"
 
