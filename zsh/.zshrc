@@ -17,14 +17,14 @@ welcome_message() {
     # Today’s date
     local today_date=$(date +"%A, %B %d, %Y")
 
-    # Determine next March 1
+    # Determine days to July 17
     local current_year=$(date +%Y)
     local month_day=$(date +"%m-%d")
     local target_year=$current_year
     if [[ "$month_day" > "03-01" ]]; then
       target_year=2025
     fi
-    local target_date="${target_year}-10-01"
+    local target_date="${target_year}-07-17"
 
     # Seconds since epoch
     local now_s=$(date +%s)
@@ -54,7 +54,7 @@ welcome_message() {
 
     printf "${blue}Today is ${yellow}${today_date}${reset}${magenta}.${reset}\n\n"
 
-    printf "${blue}${bold}Countdown to November 1, ${target_year}:${reset} ${cyan}${bold}${days_left} days${reset}\n\n"
+    printf "${blue}${bold}Countdown to July 17, ${target_year}:${reset} ${cyan}${bold}${days_left} days${reset}\n\n"
 
     printf "${green}${bold}System Status:${reset}\n"
     printf "  ${cyan}Uptime:     ${reset}${uptime_info}\n"
