@@ -1,7 +1,11 @@
-theme = Aura
-font-size = 16
+theme = AtelierSulphurpool
+background-opacity = 0.9
+font-size = 20
 
 window-padding-balance = true
 macos-option-as-alt = true
 keybind = cmd+backspace=esc:w
 copy-on-select = clipboard
+
+cursor-color = #ffffff
+# shaders
