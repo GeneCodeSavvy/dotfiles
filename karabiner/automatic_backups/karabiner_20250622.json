@@ -1,0 +1,301 @@
+{
+	"profiles": [
+		{
+			"complex_modifications": {
+				"rules": [
+					{
+						"description": "Page Up as Volume Mod",
+						"manipulators": [
+							{
+								"from": { "key_code": "page_up" },
+								"to": [
+									{
+										"set_variable": {
+											"name": "volume_mod",
+											"value": 1
+										}
+									}
+								],
+								"to_after_key_up": [
+									{
+										"set_variable": {
+											"name": "volume_mod",
+											"value": 0
+										}
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Page Down as Brightness Mod",
+						"manipulators": [
+							{
+								"from": { "key_code": "page_down" },
+								"to": [
+									{
+										"set_variable": {
+											"name": "brightness_mod",
+											"value": 1
+										}
+									}
+								],
+								"to_after_key_up": [
+									{
+										"set_variable": {
+											"name": "brightness_mod",
+											"value": 0
+										}
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Volume Up - Page Up + Up Arrow",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"name": "volume_mod",
+										"type": "variable_if",
+										"value": 1
+									}
+								],
+								"from": { "key_code": "up_arrow" },
+								"to": { "key_code": "volume_increment" },
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Volume Down - Page Up + Down Arrow",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"name": "volume_mod",
+										"type": "variable_if",
+										"value": 1
+									}
+								],
+								"from": { "key_code": "down_arrow" },
+								"to": { "key_code": "volume_decrement" },
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Brightness Up - Page Down + Up Arrow",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"name": "brightness_mod",
+										"type": "variable_if",
+										"value": 1
+									}
+								],
+								"from": { "key_code": "up_arrow" },
+								"to": { "key_code": "display_brightness_increment" },
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Brightness Down - Page Down + Down Arrow",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"name": "brightness_mod",
+										"type": "variable_if",
+										"value": 1
+									}
+								],
+								"from": { "key_code": "down_arrow" },
+								"to": { "key_code": "display_brightness_decrement" },
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Page Up as Volume Mod",
+						"manipulators": [
+							{
+								"from": { "key_code": "page_up" },
+								"to": [
+									{
+										"set_variable": {
+											"name": "volume_mod",
+											"value": 1
+										}
+									}
+								],
+								"to_after_key_up": [
+									{
+										"set_variable": {
+											"name": "volume_mod",
+											"value": 0
+										}
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Change Right option to hyper key",
+						"manipulators": [
+							{
+								"from": {
+									"key_code": "right_option",
+									"modifiers": { "optional": ["any"] }
+								},
+								"to": [
+									{
+										"key_code": "left_shift",
+										"modifiers": ["left_command", "left_control", "left_option"]
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Change double tap right ⇧ key to caps lock",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"name": "right_shift pressed",
+										"type": "variable_if",
+										"value": 1
+									}
+								],
+								"from": {
+									"key_code": "right_shift",
+									"modifiers": { "optional": ["any"] }
+								},
+								"to": [{ "key_code": "caps_lock" }],
+								"type": "basic"
+							},
+							{
+								"from": {
+									"key_code": "right_shift",
+									"modifiers": { "optional": ["any"] }
+								},
+								"to": [
+									{
+										"set_variable": {
+											"name": "right_shift pressed",
+											"value": 1
+										}
+									},
+									{ "key_code": "right_shift" }
+								],
+								"to_delayed_action": {
+									"to_if_canceled": [
+										{
+											"set_variable": {
+												"name": "right_shift pressed",
+												"value": 0
+											}
+										}
+									],
+									"to_if_invoked": [
+										{
+											"set_variable": {
+												"name": "right_shift pressed",
+												"value": 0
+											}
+										}
+									]
+								},
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Change left_command+hjkl to arrow keys",
+						"manipulators": [
+							{
+								"from": {
+									"key_code": "h",
+									"modifiers": {
+										"mandatory": ["left_command"],
+										"optional": ["any"]
+									}
+								},
+								"to": [{ "key_code": "left_arrow" }],
+								"type": "basic"
+							},
+							{
+								"from": {
+									"key_code": "j",
+									"modifiers": {
+										"mandatory": ["left_command"],
+										"optional": ["any"]
+									}
+								},
+								"to": [{ "key_code": "down_arrow" }],
+								"type": "basic"
+							},
+							{
+								"from": {
+									"key_code": "k",
+									"modifiers": {
+										"mandatory": ["left_command"],
+										"optional": ["any"]
+									}
+								},
+								"to": [{ "key_code": "up_arrow" }],
+								"type": "basic"
+							},
+							{
+								"from": {
+									"key_code": "l",
+									"modifiers": {
+										"mandatory": ["left_command"],
+										"optional": ["any"]
+									}
+								},
+								"to": [{ "key_code": "right_arrow" }],
+								"type": "basic"
+							}
+						]
+					}
+				]
+			},
+			"devices": [
+				{
+					"identifiers": {
+						"is_keyboard": true,
+						"product_id": 8208,
+						"vendor_id": 16700
+					},
+					"simple_modifications": [
+						{
+							"from": { "key_code": "caps_lock" },
+							"to": [{ "key_code": "escape" }]
+						}
+					]
+				},
+				{
+					"identifiers": {
+						"is_keyboard": true,
+						"product_id": 50504,
+						"vendor_id": 1133
+					},
+					"ignore": true
+				}
+			],
+			"name": "Harsh-Default",
+			"selected": true,
+			"virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+		}
+	]
+}
+
