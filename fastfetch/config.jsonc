@@ -1,0 +1,70 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "auto",
+        "source": "~/.config/fastfetch/pixil-frame-0.png",
+        "width": 20,
+        "height": 9,
+        "padding": {
+            "top": 2,
+            "left": 3
+        }
+    },
+    "display": {
+        "separator": "@ ",
+        "color": {
+            "keys": "1;38;5;220",
+            "title": "italic_underline_yellow"
+        },
+        "bar": {
+            "width": 10,
+            "charElapsed": "■",
+            "charTotal": "-"
+        },
+        "percent": {
+            "type": 2
+        }
+    },
+    "modules": [
+        "title",
+        "separator",
+        "os",
+        // "host",
+        // "kernel",
+        "uptime",
+        "packages",
+        // "shell",
+        // "display",
+        // "de",
+        // "wm",
+        // "wmtheme",
+        // "theme",
+        // "icons",
+        // "font",
+        // "cursor",
+        "terminal",
+        "terminalfont",
+        // "cpu",
+        // "gpu",
+        "memory",
+        // "swap",
+        // "disk",
+        {
+            "type": "disk",
+            "key": "Disk",
+            "format": "{size-percentage-bar} {size-used} / {size-total}"
+        },
+        // "localip",
+        "battery",
+        // "poweradapter",
+        // "locale",
+        "break",
+        // "colors"
+        {
+            "type": "datetime",
+            "key": "Date",
+            "format": "{weekday-short} {day-pretty}/{month-pretty}/{year-short}"
+        },
+        "break"
+    ]
+}
