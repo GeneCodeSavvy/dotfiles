@@ -1,78 +1,34 @@
-# Auto-extracted interactive-shell settings from original .zshrc
-# Custom welcome message function for macOS
-welcome_message() {
-    # Define colors using ANSI escape codes
-    local black='\033[30m'
-    local red='\033[31m'
-    local green='\033[32m'
-    local yellow='\033[33m'
-    local blue='\033[34m'
-    local magenta='\033[35m'
-    local cyan='\033[36m'
-    local white='\033[37m'
-    local reset='\033[0m'
-    local bold='\033[1m'
-    local underline='\033[4m'
+remaining_days() {
+    local CUSTOM_DATE=$1
 
-    # Today’s date
-    local today_date=$(date +"%A, %B %d, %Y")
-
-    # Determine days to July 17
-    local current_year=$(date +%Y)
-    local month_day=$(date +"%m-%d")
-    local target_year=$current_year
-    if [[ "$month_day" > "03-01" ]]; then
-      target_year=2025
+    # === Calculate days remaining ===
+    local TODAY=$(date +%s)
+    local TARGET=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +%s)
+    local SECONDS_REMAINING=$(( TARGET - TODAY ))
+    local DAYS_REMAINING=$(( SECONDS_REMAINING / 86400 ))
+    local PRETTY_DATE=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +"%A, %B %d, %Y")
+    
+    # Don't allow negative days
+    if (( DAYS_REMAINING < 0 )); then
+        DAYS_REMAINING=0
     fi
-    local target_date="${target_year}-07-17"
 
-    # Seconds since epoch
-    local now_s=$(date +%s)
-    local target_s=$(date -jf "%Y-%m-%d" "${target_date}" +%s)
+    # === Escape the injected text properly ===
+    local MESSAGE="\t$DAYS_REMAINING days to $PRETTY_DATE"
 
-    # Days left
-    local days_left=$(( (target_s - now_s) / 86400 ))
+    # ANSI color/style codes
+    ITALIC_RED='\e[1;3;91m'
+    RESET='\e[0m'
 
-    # Uptime (e.g. “3 days, 5:22”)
-    local uptime_info=$(uptime | sed -E 's/.*up ([^,]+), .*/\1/')
+    # Use the variables in the printf statements
+    printf "${ITALIC_RED}\tReal Men, produce more than they consume.\n\tLet's get to work. All the best.\n${RESET}\n"
+    printf "${ITALIC_RED}${MESSAGE}${RESET}\n"
 
-    # Load averages
-    local load_avg=$(uptime | awk -F'load averages?: ' '{print $2}')
-
-    # Memory usage via top
-    # PhysMem: 8G used (2G wired), 2G unused
-    local mem_usage=$(top -l 1 | awk '/PhysMem/ {print $2 " used, " $6 " free"}')
-
-    # Disk usage on /
-    local disk_usage=$(df -h / | awk 'NR==2 {print $3 " / " $2}')
-
-    # Logged‑in users
-    local users_logged=$(who | wc -l)
-
-    # Print it all
-    printf "\n${blue}${bold}Welcome to your terminal,${reset} ${red}${underline}Harsh${reset}\n\n"
-
-    printf "${blue}Today is ${yellow}${today_date}${reset}${magenta}.${reset}\n\n"
-
-    printf "${blue}${bold}Countdown to July 17, ${target_year}:${reset} ${cyan}${bold}${days_left} days${reset}\n\n"
-
-    printf "${green}${bold}System Status:${reset}\n"
-    printf "  ${cyan}Uptime:     ${reset}${uptime_info}\n"
-    printf "  ${cyan}Load Avg:   ${reset}${load_avg}\n"
-    printf "  ${cyan}Memory:     ${reset}${mem_usage}\n"
-    printf "  ${cyan}Disk (/):   ${reset}${disk_usage}\n"
-    printf "  ${cyan}Users:      ${reset}${users_logged}\n\n"
-
-    # Motivational quote
-    local quote="Change happens every day. Strive for what you desire, every day."
-    printf "${magenta}${bold}\"${quote}\"${reset}\n\n"
-
-    printf "${red}${bold}Let's get to work—good luck!${reset}\n\n"
 }
 
+fastfetch
+remaining_days "2025-07-17"
 
-# Call the function on each new session
-welcome_message
 
 
 # Set the directory to store Zinit and plugins
@@ -124,6 +80,7 @@ alias notes='cd ~/notes/ && NVIM_APPNAME=notesvim nvim'
 alias gsoc='cd ~/notes/projects/gsoc/ && NVIM_APPNAME=notesvim nvim'
 alias blog='cd ~/notes/projects/portfolio/ && NVIM_APPNAME=notesvim nvim'
 alias dev='cd ~/notes/development/ && NVIM_APPNAME=notesvim nvim'
+alias pomo='~/scripts/pomo.sh'
 alias skim='/Applications/Skim.app/Contents/MacOS/Skim'
 
 # Add snippets
