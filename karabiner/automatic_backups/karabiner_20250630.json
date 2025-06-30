@@ -4,7 +4,7 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Right Command Key → Hyper Key",
+                        "description": "Right Command Key → Hyper Key (⌃⌥⇧⌘)",
                         "manipulators": [
                             {
                                 "from": {
@@ -13,8 +13,8 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_command",
-                                        "modifiers": ["left_shift", "left_option", "left_control"]
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
                                     }
                                 ],
                                 "type": "basic"
