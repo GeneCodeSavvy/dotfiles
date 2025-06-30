@@ -49,12 +49,12 @@ sketchybar --default "${default[@]}"
 # only the properties deviating from the current defaults need to be set
 
 sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
+           --set chevron icon= icon.font.size=25 label.drawing=off \
            --add item front_app left \
            --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched \
            --add item pomodoro left \
-           --set pomodoro padding_left=10 icon.padding_left=2 script="$PLUGIN_DIR/pomodoro.sh update" update_freq=1 label.align=center \
+           --set pomodoro padding_left=10 icon.padding_left=2 icon.font.size=25 script="$PLUGIN_DIR/pomodoro.sh update" update_freq=1 label.align=center \
            --add event pomodoro_notification \
            --subscribe pomodoro pomodoro_notification
 
