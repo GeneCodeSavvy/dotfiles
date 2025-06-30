@@ -156,19 +156,19 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
     if.app-id = 'com.mitchellh.ghostty'
-    run = ['layout floating', 'move-node-to-workspace 1']
+    run = ['layout tiling', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
     if.app-id = 'com.google.Chrome'
-    run = ['layout floating', 'move-node-to-workspace 2']
+    run = ['layout tiling', 'move-node-to-workspace 2']
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
-    run = ['layout floating', 'move-node-to-workspace 3']
+    run = ['layout tiling', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
    if.app-id = 'com.apple.systempreferences'
-   run = ['layout floating', 'move-node-to-workspace 4']  # The callback itself
+   run = ['layout tiling', 'move-node-to-workspace 4']  # The callback itself
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
