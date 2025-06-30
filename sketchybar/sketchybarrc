@@ -86,7 +86,7 @@ sketchybar --add item clock right \
 sketchybar --add bracket utils clock volume battery \
            --set         utils background.color="$GREY" \
                                 background.corner_radius=4  \
-                                background.height=30
+                                background.height=28
 #### Adding Center Items ####
 sketchybar ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
