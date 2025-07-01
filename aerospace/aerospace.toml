@@ -167,8 +167,12 @@ automatically-unhide-macos-hidden-apps = false
     run = ['layout tiling', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
-   if.app-id = 'com.apple.systempreferences'
+   if.app-id = 'com.apple.iBooksX'
    run = ['layout tiling', 'move-node-to-workspace 4']  # The callback itself
+
+[[on-window-detected]]
+   if.app-id = 'com.apple.systempreferences'
+   run = ['layout tiling', 'move-node-to-workspace 5']
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
