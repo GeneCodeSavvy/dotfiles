@@ -154,5 +154,3 @@ sketchybar --add bracket utils volume battery mic brew \
 ##### Final Update #####
 # Force all scripts to run once to populate the bar.
 sketchybar --update
-
-echo "SketchyBar configuration loaded!"
