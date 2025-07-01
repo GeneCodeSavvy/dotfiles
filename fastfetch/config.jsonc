@@ -29,6 +29,18 @@
         "title",
         "separator",
         "os",
+        {
+            "type": "cpu",
+            "key": "CPU_temp",
+            "temp":true,
+            "format": "{temperature}"
+        },
+        {
+            "type": "gpu",
+            "key": "GPU_temp",
+            "temp":true,
+            "format": "{temperature}"
+        },
         // "host",
         // "kernel",
         "uptime",
