@@ -1,33 +1,21 @@
 #!/bin/bash
 
+
 source "$HOME/.config/sketchybar/colors.sh"
-
-# This is a demo config to showcase some of the most important commands.
-# It is meant to be changed and configured, as it is intentionally kept sparse.
-# For a (much) more advanced configuration example see my dotfiles:
-# https://github.com/FelixKratz/dotfiles
-
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 ##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# These are only some of the options available. For all options see:
-# https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
-
 sketchybar --hotload true
-sketchybar --bar position=top height=40 blur_radius=0 color=$BAR_COLOR
+sketchybar --bar position=top \
+               height=40 \
+               blur_radius=0 \
+               color=$BAR_COLOR
 
-##### Changing Defaults #####
-# We now change some default values, which are applied to all further items.
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
-
-default=(
+##### Default Item Properties #####
+default_properties=(
   padding_left=5
   padding_right=5
-  icon.font="Hack Nerd Font:Bold:17.0"
+  icon.font="Hack Nerd Font:Bold:18.0"
   label.font="Hack Nerd Font:Bold"
   icon.color=$ICON_COLOR
   label.color=$WHITE
@@ -37,56 +25,134 @@ default=(
   label.padding_left=4
   label.padding_right=4
 )
-sketchybar --default "${default[@]}"
+sketchybar --default "${default_properties[@]}"
 
-##### Adding Mission Control Space Indicators #####
-# Let's add some mission control spaces:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces.
+################################################################################
+# ITEM & BRACKET PROPERTY DEFINITIONS
+#
+# We define properties in arrays for better readability and easier management.
+# These arrays are then referenced when creating the items.
+################################################################################
+
+##### LEFT ITEMS #####
+eth_properties=(
+  icon=
+  update_freq=20
+  script="$PLUGIN_DIR/eth.sh"
+)
+
+btc_properties=(
+  icon=
+  update_freq=20
+  script="$PLUGIN_DIR/btc.sh"
+)
+
+##### CENTER ITEMS #####
+pomodoro_properties=(
+  padding_left=10
+  icon.padding_left=2
+  icon.font.size=20
+  script="$PLUGIN_DIR/pomodoro.sh update"
+  update_freq=1
+  label.align=center
+)
+
+##### RIGHT ITEMS #####
+dates_properties=(
+  update_freq=86400
+  icon=󰸘
+  label.padding_right=10
+  script="$PLUGIN_DIR/date.sh"
+)
+
+clock_properties=(
+  update_freq=10
+  icon=
+  script="$PLUGIN_DIR/clock.sh"
+)
+
+volume_properties=(
+  script="$PLUGIN_DIR/volume.sh"
+)
+
+battery_properties=(
+  update_freq=120
+  script="$PLUGIN_DIR/battery.sh"
+)
+
+brew_properties=(
+  icon=
+  label=?
+  padding_right=10
+  script="$PLUGIN_DIR/brew.sh"
+)
+
+mic_properties=(
+  update_freq=3
+  script="$PLUGIN_DIR/mic.sh"
+  click_script="$PLUGIN_DIR/mic_click.sh"
+  padding_right=0
+  padding_left=10
+)
+
+spacer_properties=(
+  width=10
+)
+
+##### BRACKETS #####
+bracket_properties=(
+  background.color="$GREY"
+  background.height=28
+  background.corner_radius=12
+)
+
+################################################################################
+# ITEM & BRACKET CREATION
+#
+# Here we add the items and brackets to the bar,
+# applying their properties from the arrays defined above.
+################################################################################
 
 ##### Adding Left Items #####
-# We add some regular items to the left side of the bar, where
-# only the properties deviating from the current defaults need to be set
+sketchybar --add item eth left  --set eth  "${eth_properties[@]}" \
+           --add item btc left  --set btc  "${btc_properties[@]}"
 
-sketchybar --add item chevron left \
-           --set chevron icon= icon.font.size=25 label.drawing=off \
-           --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched \
-           --add item pomodoro left \
-           --set pomodoro padding_left=10 icon.padding_left=2 icon.font.size=25 script="$PLUGIN_DIR/pomodoro.sh update" update_freq=1 label.align=center \
+##### Adding Center Items #####
+sketchybar --add item pomodoro center \
+           --set pomodoro "${pomodoro_properties[@]}" \
            --add event pomodoro_notification \
            --subscribe pomodoro pomodoro_notification
 
-
-
 ##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
+sketchybar --add item dates right   --set dates   "${dates_properties[@]}" \
+           --add item clock right   --set clock   "${clock_properties[@]}"
 
-# Some items refresh on a fixed cycle, e.g. the clock runs its script once
-# every 10s. Other items respond to events they subscribe to, e.g. the
-# volume.sh script is only executed once an actual change in system audio
-# volume is registered. More info about the event system can be found here:
-# https://felixkratz.github.io/SketchyBar/config/events
+sketchybar --add item spacer_2 right --set spacer_2 "${spacer_properties[@]}"
 
-sketchybar --add item clock right \
-    --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
-    --add item volume right \
-    --set volume script="$PLUGIN_DIR/volume.sh" \
-    --subscribe volume volume_change \
-    --add item battery right \
-    --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-    --subscribe battery system_woke power_source_change \
-    --add item date right \
-    --set date update_freq=86400 icon=📅 background.color="$GREY" background.height=30 background.corner_radius=4 background.padding_right=15 script="$PLUGIN_DIR/date.sh" icon.y_offset=2 icon.padding_left=10 label.padding_right=10
+sketchybar --add item volume right  --set volume  "${volume_properties[@]}" \
+           --subscribe volume volume_change \
+           --add item battery right --set battery "${battery_properties[@]}" \
+           --subscribe battery system_woke power_source_change
 
-#### Adding a bracket, to group battery, sound, time
-sketchybar --add bracket utils clock volume battery \
-           --set         utils background.color="$GREY" \
-                                background.corner_radius=4  \
-                                background.height=28
-#### Adding Center Items ####
-sketchybar ##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --add event brew_update \
+           --add item brew right    --set brew    "${brew_properties[@]}" \
+           --subscribe brew brew_update
+
+sketchybar --add item mic right     --set mic     "${mic_properties[@]}"
+
+##### Adding Brackets #####
+sketchybar --add bracket crypto eth btc \
+           --set crypto "${bracket_properties[@]}"
+
+sketchybar --add bracket time dates clock \
+           --set time "${bracket_properties[@]}"
+
+sketchybar --add bracket utils volume battery mic brew \
+           --set utils "${bracket_properties[@]}"
+
+
+##### Final Update #####
+# Force all scripts to run once to populate the bar.
 sketchybar --update
+
+echo "SketchyBar configuration loaded!"
