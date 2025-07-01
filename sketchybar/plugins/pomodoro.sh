@@ -16,7 +16,7 @@ get_status_icon() {
 	case "$1" in
 		"STAND_BY")   echo "󰓛" ;;
 		"PAUSE")      echo "󰏤" ;;
-		"LONG_PAUSE") echo "󰃶" ;;
+		"LONG_PAUSE") echo "" ;;
 		"WORK")       echo "󰃁" ;;
 	esac
 }

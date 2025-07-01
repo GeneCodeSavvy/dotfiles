@@ -7,7 +7,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 ##### Bar Appearance #####
 sketchybar --hotload true
 sketchybar --bar position=top \
-               height=40 \
+               height=45 \
                blur_radius=0 \
                color=$BAR_COLOR
 
@@ -15,11 +15,11 @@ sketchybar --bar position=top \
 default_properties=(
   padding_left=5
   padding_right=5
-  icon.font="Hack Nerd Font:Bold:18.0"
-  label.font="Hack Nerd Font:Bold"
+  icon.font="Hack Nerd Font:Bold:19.0"
+  label.font="SF Pro:Bold:19.0"
   icon.color=$ICON_COLOR
   label.color=$WHITE
-  label.font.size=18.0
+  label.y_offset=-1
   icon.padding_left=4
   icon.padding_right=4
   label.padding_left=4
@@ -39,22 +39,25 @@ eth_properties=(
   icon=
   update_freq=20
   script="$PLUGIN_DIR/eth.sh"
+  icon.padding_left=10
 )
 
 btc_properties=(
   icon=
   update_freq=20
   script="$PLUGIN_DIR/btc.sh"
+  label.padding_right=10
 )
 
 ##### CENTER ITEMS #####
 pomodoro_properties=(
-  padding_left=10
-  icon.padding_left=2
+  icon.padding_right=9
   icon.font.size=20
   script="$PLUGIN_DIR/pomodoro.sh update"
   update_freq=1
   label.align=center
+  icon.padding_left=10
+  label.padding_right=10
 )
 
 ##### RIGHT ITEMS #####
@@ -81,29 +84,29 @@ battery_properties=(
 )
 
 brew_properties=(
-  icon=
-  label=?
-  padding_right=10
+  icon=🍺
+  label=0
   script="$PLUGIN_DIR/brew.sh"
 )
 
 mic_properties=(
+  padding_right=0
+  label.padding_right=0
+  icon.padding_right=0
   update_freq=3
   script="$PLUGIN_DIR/mic.sh"
   click_script="$PLUGIN_DIR/mic_click.sh"
-  padding_right=0
-  padding_left=10
+  icon.padding_left=12
 )
 
-spacer_properties=(
-  width=10
-)
 
 ##### BRACKETS #####
 bracket_properties=(
   background.color="$GREY"
   background.height=28
-  background.corner_radius=12
+  background.corner_radius=10
+  background.shadow.distance=12
+  background.shadow.color="0x30000000"
 )
 
 ################################################################################
@@ -127,7 +130,6 @@ sketchybar --add item pomodoro center \
 sketchybar --add item dates right   --set dates   "${dates_properties[@]}" \
            --add item clock right   --set clock   "${clock_properties[@]}"
 
-sketchybar --add item spacer_2 right --set spacer_2 "${spacer_properties[@]}"
 
 sketchybar --add item volume right  --set volume  "${volume_properties[@]}" \
            --subscribe volume volume_change \
@@ -144,13 +146,11 @@ sketchybar --add item mic right     --set mic     "${mic_properties[@]}"
 sketchybar --add bracket crypto eth btc \
            --set crypto "${bracket_properties[@]}"
 
-sketchybar --add bracket time dates clock \
-           --set time "${bracket_properties[@]}"
+sketchybar --add bracket system dates clock volume battery mic brew \
+           --set system "${bracket_properties[@]}"
 
-sketchybar --add bracket utils volume battery mic brew \
-           --set utils "${bracket_properties[@]}"
-
-
+sketchybar --add bracket pomo pomodoro \
+           --set pomo "${bracket_properties[@]}"
 ##### Final Update #####
 # Force all scripts to run once to populate the bar.
 sketchybar --update

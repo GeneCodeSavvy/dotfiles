@@ -14,4 +14,4 @@ raw_change=$(echo "$response" | jq -r '.[] | select(.pair == "ETHUSD") | .percen
 percent_change=$(printf "%.2f" "$(echo "$raw_change * 100" | bc -l)")
 
 # Update sketchybar item (here labeled "eth") with the percentage change
-sketchybar -m --set $NAME label="${percent_change}%"
+sketchybar -m --set $NAME label="${percent_change} %"
