@@ -64,7 +64,10 @@
             "format": "{size-percentage-bar} {size-used} / {size-total}"
         },
         // "localip",
-        "battery",
+        {
+            "type": "battery",
+            "key": "Battery"
+        },
         // "poweradapter",
         // "locale",
         "break",
