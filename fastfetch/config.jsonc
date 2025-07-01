@@ -44,11 +44,8 @@
         // "cursor",
         "terminal",
         "terminalfont",
-        // "cpu",
-        // "gpu",
         "memory",
         // "swap",
-        // "disk",
         {
             "type": "disk",
             "key": "Disk",
