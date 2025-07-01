@@ -14,7 +14,7 @@ remaining_days() {
     fi
 
     # === Escape the injected text properly ===
-    local MESSAGE="\t$DAYS_REMAINING days to $PRETTY_DATE"
+    local MESSAGE="\t$DAYS_REMAINING days --> '$PRETTY_DATE'"
 
     # ANSI color/style codes
     ITALIC_RED='\e[1;3;91m'
