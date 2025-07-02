@@ -67,7 +67,7 @@ send_notification() {
 	local text="$1"
 	local subtitle="$2"
 	if command -v sketchybar &>/dev/null; then
-		sketchybar --trigger "pomodoro_notification" title="$text" subtitle="$subtitle"
+		sketchybar --trigger "pomodoro_notification"
 	fi
     osascript -e "display notification \"$text\" with title \"Pomodoro\" subtitle \"$subtitle\" sound name \"$NOTIFICATION_SOUND\"" >/dev/null
 }

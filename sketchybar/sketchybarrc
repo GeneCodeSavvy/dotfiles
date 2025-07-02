@@ -69,7 +69,7 @@ dates_properties=(
 )
 
 clock_properties=(
-  update_freq=10
+  update_freq=60
   icon=
   script="$PLUGIN_DIR/clock.sh"
 )
@@ -85,7 +85,9 @@ battery_properties=(
 
 brew_properties=(
   icon=🍺
+  label=0
   script="$PLUGIN_DIR/brew.sh"
+  update_freq=5400
 )
 
 mic_properties=(
@@ -137,7 +139,6 @@ sketchybar --add item volume right  --set volume  "${volume_properties[@]}" \
 
 sketchybar --add event brew_update \
            --add item brew right    --set brew    "${brew_properties[@]}" \
-           --subscribe brew brew_update
 
 sketchybar --add item mic right     --set mic     "${mic_properties[@]}"
 
