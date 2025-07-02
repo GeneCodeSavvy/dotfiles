@@ -3,14 +3,10 @@
 # --- Configuration ---
 HISTORY_FILE="$HOME/.config/pomodoro/history"
 NOTIFICATION_SOUND="Submarine"
-ITEM_NAME="pomodoro" # The name of our item in SketchyBar
 
 # Create the directory and history file if they don't exist
 mkdir -p "$(dirname "$HISTORY_FILE")"
 touch "$HISTORY_FILE"
-
-# --- Status Definition Functions (Bash 3.x compatible) ---
-# Replaces associative arrays with case statements
 
 get_status_icon() {
 	case "$1" in
@@ -24,7 +20,7 @@ get_status_icon() {
 get_status_label() {
 	case "$1" in
 		"STAND_BY")   echo "Start" ;;
-		"PAUSE")      echo "Pause" ;;
+		"PAUSE")      echo "Pause take deep breaths" ;;
 		"LONG_PAUSE") echo "Break" ;;
 		"WORK")       echo "Work" ;;
 	esac
@@ -179,7 +175,7 @@ update() {
 	current_status=$(get_current_status)
 
 	if [[ "$current_status" == "STAND_BY" ]]; then
-		sketchybar --set "$ITEM_NAME" icon="$(get_status_icon 'STAND_BY')" \
+		sketchybar --set "$NAME" icon="$(get_status_icon 'STAND_BY')" \
 		                              label="$(get_status_label 'STAND_BY')"
 	else
 		local last_line date_part time_part _ counter
@@ -201,9 +197,9 @@ update() {
 			local icon label
 			icon=$(get_status_icon "$current_status")
 			label=$(printf "%02d:%02d" "$minutes" "$seconds")
-			sketchybar --set "$ITEM_NAME" icon="$icon" label="$label"
+			sketchybar --set "$NAME" icon="$icon" label="$label"
 		else
-			sketchybar --set "$ITEM_NAME" icon="$(get_status_icon 'STAND_BY')" \
+			sketchybar --set "$NAME" icon="$(get_status_icon 'STAND_BY')" \
 			                              label="$(get_status_label 'STAND_BY')"
 		fi
 	fi

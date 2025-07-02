@@ -7,7 +7,7 @@
 response=$(curl -s 'https://api.gemini.com/v1/pricefeed')
 
 # Extract the percentChange24h for BTCUSD and multiply by 100
-raw_change=$(echo "$response" | jq -r '.[] | select(.pair == "BTCUSD") | .percentChange24h')
+raw_change=$(echo "$response" | jq -r '.[] | select(.pair == "BTCUSDT") | .percentChange24h')
 
 # Calculate percentage and format to 2 decimal places
 percent_change=$(printf "%.2f" "$(echo "$raw_change * 100" | bc -l)")
