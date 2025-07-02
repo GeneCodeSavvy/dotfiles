@@ -84,10 +84,10 @@ battery_properties=(
 )
 
 brew_properties=(
-  icon=🍺
+  icon=
   label=0
   script="$PLUGIN_DIR/brew.sh"
-  update_freq=5400
+  update_freq=86400
 )
 
 mic_properties=(
