@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 HISTORY_FILE="$HOME/.config/pomodoro/history"
-NOTIFICATION_SOUND="Submarine"
+NOTIFICATION_SOUND="Frog"
 
 # Create the directory and history file if they don't exist
 mkdir -p "$(dirname "$HISTORY_FILE")"
@@ -68,8 +68,9 @@ send_notification() {
 	local subtitle="$2"
 	if command -v sketchybar &>/dev/null; then
 		sketchybar --trigger "pomodoro_notification"
-	fi
-    osascript -e "display notification \"$text\" with title \"Pomodoro\" subtitle \"$subtitle\" sound name \"$NOTIFICATION_SOUND\"" >/dev/null
+        afplay "/System/Library/Sounds/${NOTIFICATION_SOUND}.aiff"
+        mac-brightnessctl -f 3 0.6
+    fi
 }
 
 write_status_to_file() {
