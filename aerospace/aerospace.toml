@@ -117,10 +117,10 @@ automatically-unhide-macos-hidden-apps = false
     alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    alt-h = 'focus left'
-    alt-j = 'focus down'
-    alt-k = 'focus up'
-    alt-l = 'focus right'
+    ctrl-alt-shift-cmd-h = 'focus left'
+    ctrl-alt-shift-cmd-j = 'focus down'
+    ctrl-alt-shift-cmd-k = 'focus up'
+    ctrl-alt-shift-cmd-l = 'focus right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-h = 'move left'
@@ -133,11 +133,11 @@ automatically-unhide-macos-hidden-apps = false
     alt-equal = 'resize smart +50'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5' # In your config, you can drop workspace bindings that you don't need
+    ctrl-alt-shift-cmd-1 = 'workspace 1'
+    ctrl-alt-shift-cmd-2 = 'workspace 2'
+    ctrl-alt-shift-cmd-3 = 'workspace 3'
+    ctrl-alt-shift-cmd-4 = 'workspace 4'
+    ctrl-alt-shift-cmd-5 = 'workspace 5' # In your config, you can drop workspace bindings that you don't need
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -147,7 +147,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-5 = 'move-node-to-workspace 5'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    alt-tab = 'workspace-back-and-forth'
+    ctrl-alt-shift-cmd-tab = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
     # alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
