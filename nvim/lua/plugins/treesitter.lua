@@ -21,7 +21,7 @@ return { -- Highlight, edit, and navigate code
 			},
 			-- Autoinstall languages that are not installed
 			-- auto_install = true,
-			auto_install = false,
+			auto_install = true,
 
 			highlight = {
 				enable = true,
