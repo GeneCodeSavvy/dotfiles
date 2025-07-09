@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 HISTORY_FILE="$HOME/.config/pomodoro/history"
-NOTIFICATION_SOUND="Frog"
+NOTIFICATION_SOUND="Ping"
 
 # Create the directory and history file if they don't exist
 mkdir -p "$(dirname "$HISTORY_FILE")"
