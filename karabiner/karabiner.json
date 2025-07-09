@@ -4,6 +4,20 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Caps Lock to Esc and Ctrl",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_control" }],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Right Command Key → Hyper Key",
                         "manipulators": [
                             {
@@ -173,12 +187,6 @@
             ],
             "name": "Harsh-Default",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "escape" }]
-                }
-            ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
     ]
