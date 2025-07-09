@@ -64,13 +64,13 @@ pomodoro_properties=(
 dates_properties=(
   update_freq=86400
   icon=󰸘
-  label.padding_right=10
   script="$PLUGIN_DIR/date.sh"
 )
 
 clock_properties=(
   update_freq=60
   icon=
+  label.padding_right=10
   script="$PLUGIN_DIR/clock.sh"
 )
 
@@ -87,7 +87,7 @@ brew_properties=(
   icon=
   label=0
   script="$PLUGIN_DIR/brew.sh"
-  update_freq=86400
+  update_freq=3600
 )
 
 mic_properties=(
@@ -128,8 +128,9 @@ sketchybar --add item pomodoro center \
            --subscribe pomodoro pomodoro_notification
 
 ##### Adding Right Items #####
-sketchybar --add item dates right   --set dates   "${dates_properties[@]}" \
-           --add item clock right   --set clock   "${clock_properties[@]}"
+sketchybar --add item clock right   --set clock   "${clock_properties[@]}" \
+           --add item dates right   --set dates   "${dates_properties[@]}"
+           
 
 
 sketchybar --add item volume right  --set volume  "${volume_properties[@]}" \
