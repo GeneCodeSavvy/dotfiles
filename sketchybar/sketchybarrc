@@ -87,7 +87,7 @@ brew_properties=(
   icon=
   label=0
   script="$PLUGIN_DIR/brew.sh"
-  update_freq=3600
+  update_freq=86400
 )
 
 mic_properties=(
