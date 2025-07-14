@@ -20,8 +20,7 @@ end, { desc = "Toggle Diagnostics" })
 -- Navigate between buffers
 -- See `:help buffer`
 -- Use <Tab> and <S-Tab> to navigate between buffers
-vim.keymap.set("n", "<Tab>", "<cmd>:bn!<CR>", { desc = "Move to [N]ext buffer" })
-vim.keymap.set("n", "<S-Tab>", "<cmd>:bp!<CR>", { desc = "Move to [P]revious buffer" })
+vim.keymap.set("n", "<Tab>", "<cmd>:b#<CR>", { desc = "Switch to [#] alternate buffer" })
 -- Use <leader>! to delete the current buffer
 vim.keymap.set("n", "<leader>!", "<cmd>:bd<CR>", { desc = "[D]elete the current buffer" })
 
