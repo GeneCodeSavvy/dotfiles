@@ -20,6 +20,8 @@ path=(
   # Go tools
   "$HOME/go/bin"
 
+  "$HOME/.config/emacs/bin"
+
   # Preserve whatever was already in PATH
   $path
 )
