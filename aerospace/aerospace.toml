@@ -166,6 +166,10 @@ automatically-unhide-macos-hidden-apps = false
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
+    run = ['layout tiling', 'move-node-to-workspace 5']
+
+[[on-window-detected]]
+    if.app-id = 'org.gnu.Emacs'
     run = ['layout tiling', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
