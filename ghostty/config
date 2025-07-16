@@ -13,8 +13,8 @@ quit-after-last-window-closed = true
 
 macos-option-as-alt = true
 keybind = cmd+backspace=esc:w
-keybind = ctrl+alt+shift+cmd+j=scroll_page_down
-keybind = ctrl+alt+shift+cmd+k=scroll_page_up
-keybind = ctrl+alt+shift+cmd+g=scroll_to_top
+keybind = opt+j=scroll_page_down
+keybind = opt+k=scroll_page_up
+keybind = opt+g=scroll_to_top
 
 # shaders
