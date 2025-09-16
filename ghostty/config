@@ -1,8 +1,8 @@
 shell-integration = zsh
 
 theme = tokyonight_night
-background-opacity = 0.9
-font-size = 20
+background-opacity = 1.0
+font-size = 16
 cursor-color = #FFC000
 window-padding-balance = true
 bold-is-bright = true
@@ -12,9 +12,29 @@ window-save-state = always
 quit-after-last-window-closed = true
 
 macos-option-as-alt = true
-keybind = cmd+backspace=esc:w
+keybind = super+backspace=esc:w
 keybind = opt+j=scroll_page_down
 keybind = opt+k=scroll_page_up
 keybind = opt+g=scroll_to_top
 
-# shaders
+keybind = global:super+grave_accent=toggle_quick_terminal
+
+# -----------------
+# Use Alt + direction (h, j, k, l) for creating new splits,
+# similar to Vim navigation.
+keybind = opt+h=new_split:left
+keybind = opt+l=new_split:right
+keybind = opt+k=new_split:up
+keybind = opt+j=new_split:down
+
+# Use a more intuitive shortcut for the 'auto' split.
+keybind = ctrl+slash=new_split:auto
+
+# Navigate between splits
+# -----------------------
+# Use Ctrl + direction (h, j, k, l) for moving between splits.
+# This is a common convention in terminal applications. [2]
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+l=goto_split:right
+keybind = ctrl+k=goto_split:up
+keybind = ctrl+j=goto_split:down
