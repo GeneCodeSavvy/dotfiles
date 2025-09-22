@@ -1,6 +1,6 @@
 shell-integration = zsh
 
-theme = tokyonight_night
+theme = Tokyonight Night
 background-opacity = 1.0
 font-size = 16
 cursor-color = #FFC000
@@ -13,8 +13,8 @@ quit-after-last-window-closed = true
 
 macos-option-as-alt = true
 keybind = super+backspace=esc:w
-keybind = opt+j=scroll_page_down
-keybind = opt+k=scroll_page_up
+keybind = opt+]=scroll_page_down
+keybind = opt+[=scroll_page_up
 keybind = opt+g=scroll_to_top
 
 keybind = global:super+grave_accent=toggle_quick_terminal
