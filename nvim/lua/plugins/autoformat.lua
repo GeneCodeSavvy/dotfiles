@@ -63,10 +63,14 @@ return {
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
-				javascript = { "biome", "biome-organize-imports" },
-				javascriptreact = { "biome", "biome-organize-imports" },
-				typescript = { "biome", "biome-organize-imports" },
-				typescriptreact = { "biome", "biome-organize-imports" },
+				-- javascript = { "biome", "biome-organize-imports" },
+				-- javascriptreact = { "biome", "biome-organize-imports" },
+				-- typescript = { "biome", "biome-organize-imports" },
+				-- typescriptreact = { "biome", "biome-organize-imports" },
+				javascript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
 				json = { "biome" },
 				html = { "htmlbeautifier" },
 				jinja = { "djlint" },

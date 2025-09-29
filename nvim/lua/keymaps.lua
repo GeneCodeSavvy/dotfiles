@@ -17,6 +17,7 @@ vim.keymap.set("n", "<leader>tq", function()
 	end
 end, { desc = "Toggle Diagnostics" })
 
+vim.keymap.set("n", "<leader>o", "<cmd>write<CR>", { desc = "Write open buffer" })
 -- Navigate between buffers
 -- See `:help buffer`
 -- Use <Tab> and <S-Tab> to navigate between buffers
@@ -44,3 +45,19 @@ vim.keymap.set("n", "<left>", '<cmd>echo "Key Disabled"<CR>')
 vim.keymap.set("n", "<right>", '<cmd>echo "Key Disabled"<CR>')
 vim.keymap.set("n", "<up>", '<cmd>echo "Key Disabled"<CR>')
 vim.keymap.set("n", "<down>", '<cmd>echo "Key Disabled"<CR>')
+
+-- Open a quick terminal
+local job_id = 0
+vim.keymap.set("n", "<leader>st", function()
+	vim.cmd.vnew() -- Split the window horizontally
+	vim.cmd.term() -- Open terminal
+	vim.cmd.wincmd("J")
+	vim.api.nvim_win_set_height(0, 5)
+
+	job_id = vim.bo.channel
+end, { desc = "Open terminal" })
+-- Escape terminal mode and move focus to upper window
+vim.keymap.set("t", "<C-Space>", function()
+	vim.cmd("stopinsert") -- Same as <C-\><C-n>, exits terminal insert mode
+	vim.cmd("wincmd k") -- Moves focus to the window above
+end, { desc = "Escape Terminal and move up" })

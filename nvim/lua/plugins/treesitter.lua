@@ -1,3 +1,4 @@
+vim.treesitter.language.register("jinja", { "njk" })
 return { -- Highlight, edit, and navigate code
 	{
 		"nvim-treesitter/nvim-treesitter",
