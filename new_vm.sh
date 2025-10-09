@@ -29,6 +29,10 @@ nvm alias default node
 # setting up python
 sudo apt install python3-pip python3-venv -y
 
+# installing and setting up go
+sudo apt install golang-go -y
+echo "export PATH=$PATH:$(go env GOPATH)/bin" >> ~/.bashrc
+
 # setting up config files
 cd ~
 mv dotfiles .config
@@ -37,6 +41,9 @@ mv dotfiles .config
 npm install pm2@latest -g
 STARTUP_COMMAND=$(pm2 startup systemd | tail -n 1)
 eval "$STARTUP_COMMAND"
+
+# setting up xcaddy, for caddy custom builds
+go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
 
 # reboot the system
 sudo reboot
