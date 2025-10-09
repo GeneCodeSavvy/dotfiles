@@ -74,5 +74,9 @@ go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
 xcaddy build --with github.com/mholt/caddy-ratelimit
 sudo mv caddy /usr/local/bin/
 
+# Open the default ports, OS Level
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+
 # reboot the system
 sudo reboot
