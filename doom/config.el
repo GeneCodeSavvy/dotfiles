@@ -33,7 +33,7 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'deeper-blue)
-(setq doom-font (font-spec :family "Fira Mono" :size 16))
+(setq doom-font (font-spec :family "Jetbrains Mono" :size 16))
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
@@ -49,6 +49,10 @@
 ;; kill the buffer
 (map! :leader
       "!" (cmd! (kill-this-buffer)))
+
+(setq! org-agenda-files
+  '("~/org/")) ; This will include all .org files in ~/org/ and its subdirectories
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
