@@ -51,7 +51,7 @@
       "!" (cmd! (kill-this-buffer)))
 
 (setq! org-agenda-files
-  '("~/org/")) ; This will include all .org files in ~/org/ and its subdirectories
+  '("~/roam/")) ; This will include all .org files in ~/org/ and its subdirectories
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
