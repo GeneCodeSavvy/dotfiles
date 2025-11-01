@@ -23,9 +23,13 @@ path=(
   # Doom Emacs
   "$HOME/.emacs.d/bin"
 
+  # Bun 
+  "$HOME/.bun/bin:$PATH"
+
   # Preserve whatever was already in PATH
   $path
 )
 
 # Finally export
 export PATH
+export GPG_TTY=$(tty) 

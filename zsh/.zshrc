@@ -27,8 +27,7 @@ remaining_days() {
 }
 
 fastfetch
-remaining_days "2025-07-17"
-
+remaining_days "2025-12-25"
 
 
 # Set the directory to store Zinit and plugins
@@ -75,13 +74,9 @@ setopt hist_find_no_dups
 
 # Aliases
 alias ls='eza'
+alias l='eza -la'
 alias c='clear'
-alias notes='cd ~/notes/ && NVIM_APPNAME=notesvim nvim'
-alias gsoc='cd ~/notes/projects/gsoc/ && NVIM_APPNAME=notesvim nvim'
-alias blog='cd ~/notes/projects/portfolio/ && NVIM_APPNAME=notesvim nvim'
-alias dev='cd ~/notes/development/ && NVIM_APPNAME=notesvim nvim'
-alias pomo='~/scripts/pomo.sh'
-alias skim='/Applications/Skim.app/Contents/MacOS/Skim'
+alias org='cd org && emacs &'
 
 # Add snippets
 zinit snippet OMZP::git
