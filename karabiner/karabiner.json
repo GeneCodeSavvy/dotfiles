@@ -73,7 +73,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "l",
+                                    "key_code": "m",
                                     "modifiers": {
                                         "mandatory": ["left_command"],
                                         "optional": ["any"]
@@ -183,6 +183,14 @@
                         "vendor_id": 1133
                     },
                     "ignore": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 289,
+                        "vendor_id": 13364
+                    },
+                    "treat_as_built_in_keyboard": true
                 }
             ],
             "name": "Harsh-Default",

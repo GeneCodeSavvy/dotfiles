@@ -39,21 +39,8 @@ sudo apt install python3-pip python3-venv -y
 cd ~
 ## download the specific, known-working bootstrap version for arm64
 wget https://go.dev/dl/go1.25.2.linux-arm64.tar.gz
-## extract the bootstrap files and rename the directory
-sudo tar -C . -xzf go1.25.2.linux-arm64.tar.gz
-mv go go-bootstrap
-## set the environment variable for the build process
-export GOROOT_BOOTSTRAP=$HOME/go-bootstrap
-## get the Go source code
-cd /usr/local/
-## Optional cleanup of any previous installation
 sudo rm -rf go
-## Clone the latest Go source code
-sudo git clone https://go.googlesource.com/go
-cd go/src/
-git checkout master
-## use the downloaded bootstrap to compile the new toolchain
-sudo ./make.bash
+sudo tar -C /usr/local -xzf go1.25.3.linux-amd64.tar.gz
 # set the PATH for the current user and session
 echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.bashrc
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin

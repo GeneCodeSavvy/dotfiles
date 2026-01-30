@@ -27,7 +27,7 @@ remaining_days() {
 }
 
 fastfetch
-remaining_days "2025-12-25"
+remaining_days "2026-2-20"
 
 
 # Set the directory to store Zinit and plugins
@@ -97,3 +97,18 @@ fi
 eval "$(starship init zsh)"  # Starship
 eval "$(fzf --zsh)"          # fzf
 eval "$(zoxide init --cmd cd zsh)"  # Zoxide
+
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/completion.zsh.inc'; fi

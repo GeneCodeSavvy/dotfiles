@@ -24,7 +24,10 @@ path=(
   "$HOME/.emacs.d/bin"
 
   # Bun 
-  "$HOME/.bun/bin:$PATH"
+  "$HOME/.bun/bin"
+
+  # Coursier
+  "$HOME/Library/Application Support/Coursier/bin"
 
   # Preserve whatever was already in PATH
   $path

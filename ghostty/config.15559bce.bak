@@ -40,4 +40,3 @@ keybind = ctrl+k=goto_split:up
 keybind = ctrl+j=goto_split:down
 
 keybind = super+l=clear_screen
-keybind = shift+enter=text:\x1b\r

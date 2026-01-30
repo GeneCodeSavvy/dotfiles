@@ -34,7 +34,8 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 30
+# accordion-padding = 30
+# tiles-padding = 30
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -138,6 +139,10 @@ automatically-unhide-macos-hidden-apps = false
     ctrl-alt-shift-cmd-3 = 'workspace 3'
     ctrl-alt-shift-cmd-4 = 'workspace 4'
     ctrl-alt-shift-cmd-5 = 'workspace 5' # In your config, you can drop workspace bindings that you don't need
+    ctrl-alt-shift-cmd-6 = 'workspace 6' # In your config, you can drop workspace bindings that you don't need
+    ctrl-alt-shift-cmd-7 = 'workspace 7' # In your config, you can drop workspace bindings that you don't need
+    ctrl-alt-shift-cmd-8 = 'workspace 8' # In your config, you can drop workspace bindings that you don't need
+    ctrl-alt-shift-cmd-9 = 'workspace 9' # In your config, you can drop workspace bindings that you don't need
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -145,6 +150,10 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-6 = 'move-node-to-workspace 6'
+    alt-shift-7 = 'move-node-to-workspace 7'
+    alt-shift-8 = 'move-node-to-workspace 8'
+    alt-shift-9 = 'move-node-to-workspace 9'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     ctrl-alt-shift-cmd-tab = 'workspace-back-and-forth'

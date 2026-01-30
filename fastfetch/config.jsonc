@@ -18,9 +18,9 @@
         },
         "bar": {
             "width": 10,
-            "elapsed": "■",
             "char": {
-                "total": "-"
+                "total": "-",
+                "elapsed": "■"
             }
         },
         "percent": {

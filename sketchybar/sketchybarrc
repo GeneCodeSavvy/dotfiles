@@ -62,7 +62,7 @@ pomodoro_properties=(
 
 ##### RIGHT ITEMS #####
 dates_properties=(
-  update_freq=86400
+  update_freq=3600
   icon=󰸘
   script="$PLUGIN_DIR/date.sh"
 )
@@ -125,7 +125,18 @@ sketchybar --add item eth left  --set eth  "${eth_properties[@]}" \
 sketchybar --add item pomodoro center \
            --set pomodoro "${pomodoro_properties[@]}" \
            --add event pomodoro_notification \
-           --subscribe pomodoro pomodoro_notification
+           --subscribe pomodoro pomodoro_notification \
+           --add item blank center \
+           --add item blank10 center \
+           --add item blank1 center \
+           --add item blank2 center \
+           --add item blank3 center \
+           --add item blank4 center \
+           --add item blank5 center \
+           --add item blank6 center \
+           --add item blank7 center \
+           --add item blank8 center \
+           --add item blank9 center \
 
 ##### Adding Right Items #####
 sketchybar --add item clock right   --set clock   "${clock_properties[@]}" \

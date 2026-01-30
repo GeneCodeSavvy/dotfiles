@@ -6,10 +6,16 @@ raycast
 zed
 zsh/.zcompcache
 zsh/.zsh_history
-zsh/.zcompdump
+zsh/.zcompdump*
 fastfetch/pixil-frame-0.png
 pomodoro
 karabiner/automatic_backups
 lexy
 tmux
 .emacs.d
+zsh/.zsh_sessions
+configstore/update-notifier-@google
+simple-update-notifier
+gcloud
+git
+jgit
