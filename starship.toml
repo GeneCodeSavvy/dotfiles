@@ -1,30 +1,36 @@
+# Use a clean, breathable format
 format = """
-$username\
-$hostname\
 $directory\
 $git_branch\
 $git_state\
 $git_status\
+$python\
 $cmd_duration\
 $line_break\
-$python\
 $character"""
 
 [directory]
-style = "blue"
+# Saffron Gold - matching the jewelry and the sun
+style = "bold #E9C46A"
+format = "[$path]($style) "
+truncation_length = 3
 
 [character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+# Success: Lotus Pink (#D1495B) | Error: Muted Earth (#6D597A)
+success_symbol = "[❯](bold #D1495B)"
+error_symbol = "[❯](bold #6D597A)"
+vimcmd_symbol = "[❮](bold #8A9A5B)"
 
 [git_branch]
-format = "[$branch]($style)"
-style = "bright-black"
+# Sage Green - matching the draped cloth/saree
+format = "on [$symbol$branch]($style) "
+symbol = "󰊢 "
+style = "bold #8A9A5B"
 
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-style = "cyan"
+# Keeps your clean logic but uses a muted Parchment color
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bold #EAD8C0) ($ahead_behind$stashed)]($style)"
+style = "italic #EAD8C0"
 conflicted = "​"
 untracked = "​"
 modified = "​"
@@ -38,9 +44,14 @@ format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
 [cmd_duration]
-format = "[$duration]($style) "
-style = "yellow"
+# Muted Sand color so it doesn't distract
+format = "took [$duration]($style) "
+style = "#9A8C73"
 
 [python]
-format = "[$virtualenv]($style) "
-style = "bright-black"
+# Using the Sage Green for environments
+format = "via [󱔎 $virtualenv]($style) "
+style = "#8A9A5B"
+
+[line_break]
+disabled = false
