@@ -88,6 +88,7 @@ alias org='cd org && emacs &'
 alias vi='nvim'
 alias oc='opencode'
 alias lz='lazygit'
+alias ff='fastfetch'
 
 # Add snippets
 zinit snippet OMZP::git
