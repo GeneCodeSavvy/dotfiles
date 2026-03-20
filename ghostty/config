@@ -15,7 +15,7 @@ cursor-color = e9c46a
 selection-background = 4f6d7a
 selection-foreground = ffffff
 
-background-opacity = 1.0
+background-opacity = 0.8
 cursor-style = block
 cursor-style-blink = true
 window-padding-x = 20

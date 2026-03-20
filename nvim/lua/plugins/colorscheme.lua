@@ -1,28 +1,56 @@
 return {
-	-- You can easily change to a different colorscheme.
-	-- Change the name of the colorscheme plugin below, and then
-	-- change the command in the config to whatever the name of that colorscheme is.
-	--
-	-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-	"marko-cerovac/material.nvim",
-	priority = 1000, -- Make sure to load this before all the other start plugins.
+	"rebelot/kanagawa.nvim",
+	priority = 1000,
 	config = function()
-		---@diagnostic disable-next-line: missing-fields
-		require("material").setup({
-			styles = {
-				comments = { italic = true }, -- Disable italics in comments
-				keywords = { italic = true },
+		require("kanagawa").setup({
+			compile = true, -- enable compiling the colorscheme
+			undercurl = true, -- enable undercurls
+			commentStyle = { italic = true },
+			functionStyle = {},
+			keywordStyle = { italic = true }, -- TRIGGERS RADON HANDWRITING
+			statementStyle = { bold = true },
+			typeStyle = {},
+			transparent = false, -- we will set the BG manually below
+			dimInactive = true, -- dims inactive windows
+			terminalColors = true, -- define vim.g.terminal_color_{0..15}
+			colors = {
+				theme = {
+					all = {
+						ui = {
+							bg_gutter = "none", -- Removes the distracting side column
+						},
+					},
+				},
 			},
-            plugins = {
-                "telescope",
-                "gitsigns",
-                "which-key"
-            }
+			overrides = function(colors)
+				local theme = colors.theme
+				return {
+					-- 1. Match the exact "Cocoa" background of your Ghostty rice
+					Normal = { bg = "#160C0A", fg = "#EAD8C0" },
+					NormalFloat = { bg = "#1B100E" }, -- Slightly lighter for popups
+					FloatBorder = { fg = "#8A9A5B", bg = "#1B100E" }, -- Sage border
+
+					-- 2. Make comments look like handwritten notes (Sage Green)
+					Comment = { fg = "#8A9A5B", italic = true },
+
+					-- 3. Match the "Lotus Red" for control flow/keywords
+					["@keyword"] = { fg = "#D1495B", italic = true },
+					["@repeat"] = { fg = "#D1495B", italic = true },
+					["@conditional"] = { fg = "#D1495B", italic = true },
+
+					-- 4. Match "Saffron Gold" for functions and numbers
+					["@function"] = { fg = "#E9C46A", bold = true },
+					["@number"] = { fg = "#E9C46A" },
+
+					-- 5. Telescope "Gallery Plaque" Look
+					TelescopeTitle = { fg = "#E9C46A", bold = true },
+					TelescopeBorder = { fg = "#1B100E", bg = "#160C0A" },
+				}
+			end,
+			theme = "dragon", -- The "Dragon" variant is the warmest/darkest
 		})
 
-		-- Load the colorscheme here.
-		-- Like many other themes, this one has different styles, and you could load
-		-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-		vim.cmd.colorscheme("material")
+		-- Load the colorscheme
+		vim.cmd("colorscheme kanagawa-dragon")
 	end,
 }
