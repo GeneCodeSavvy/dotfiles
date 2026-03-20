@@ -1,33 +1,41 @@
 remaining_days() {
     local CUSTOM_DATE=$1
 
-    # === Calculate days remaining ===
+    # === Calculation Logic ===
     local TODAY=$(date +%s)
     local TARGET=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +%s)
     local SECONDS_REMAINING=$(( TARGET - TODAY ))
     local DAYS_REMAINING=$(( SECONDS_REMAINING / 86400 ))
     local PRETTY_DATE=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +"%A, %B %d, %Y")
     
-    # Don't allow negative days
-    if (( DAYS_REMAINING < 0 )); then
-        DAYS_REMAINING=0
-    fi
+    if (( DAYS_REMAINING < 0 )); then DAYS_REMAINING=0; fi
 
-    # === Escape the injected text properly ===
-    local MESSAGE="\t$DAYS_REMAINING days --> '$PRETTY_DATE'"
+    # === Color & Style Definitions ===
+    # These use Hex codes for that precise "Lotus/Terracotta" look
+    local GOLD='\e[38;2;233;196;106m'
+    local SAGE='\e[38;2;138;154;91m'
+    local LOTUS='\e[3;38;2;209;73;91m' # The '3' triggers the Handwriting Italics
+    local RESET='\e[0m'
+    local DIM='\e[2;38;2;234;216;192m'
 
-    # ANSI color/style codes
-    ITALIC_RED='\e[1;3;91m'
-    RESET='\e[0m'
+    # === The Output ===
+    echo "" # Leading breath
+    # Quote Section (Handwritten Style)
+    printf "${LOTUS}  \"Real Men, produce more than they consume.\"${RESET}\n"
+    printf "${LOTUS}  Let's get to work. All the best.${RESET}\n"
+    
+    echo "" # Spacing
 
-    # Use the variables in the printf statements
-    printf "${ITALIC_RED}\tReal Men, produce more than they consume.\n\tLet's get to work. All the best.\n${RESET}\n"
-    printf "${ITALIC_RED}${MESSAGE}${RESET}\n"
-
+    # Data Section (Architectural Style)
+    printf "  ${GOLD}${DAYS_REMAINING}${RESET} ${DIM}days remaining until${RESET}\n"
+    printf "  ${SAGE}❯ ${PRETTY_DATE}${RESET}\n"
+    echo ""
 }
 
+# Execution
+clear
 fastfetch
-remaining_days "2026-2-20"
+remaining_days "2026-03-30"
 
 
 # Set the directory to store Zinit and plugins
@@ -77,6 +85,9 @@ alias ls='eza'
 alias l='eza -la'
 alias c='clear'
 alias org='cd org && emacs &'
+alias vi='nvim'
+alias oc='opencode'
+alias lz='lazygit'
 
 # Add snippets
 zinit snippet OMZP::git
@@ -107,8 +118,31 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/path.zsh.inc'; fi
+ad() {
+    local tmpd="$PWD"
+    cd ~/Desktop/100xdevs/work/auth/ || return
+    pnpm docker:down
+    cd "$tmpd" || return
+}
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/harshsharma/Desktop/100xdevs/s30/google-cloud-sdk/completion.zsh.inc'; fi
+au() {
+    local tmpd="$PWD"
+    cd ~/Desktop/100xdevs/work/auth/ || return
+    pnpm docker:up
+    cd "$tmpd" || return
+}
+
+adb() {
+    local tmpd="$PWD"
+    printf "%s\n" "$tmpd"
+    cd ~/Desktop/100xdevs/work/auth/ || return
+    pnpm db:up
+    cd "$tmpd" || return
+}
+
+adbd() {
+    local tmpd="$PWD"
+    cd ~/Desktop/100xdevs/work/auth/ || return
+    pnpm db:down
+    cd "$tmpd" || return
+}

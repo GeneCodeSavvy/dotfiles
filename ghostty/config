@@ -1,11 +1,32 @@
 shell-integration = zsh
 
-theme = Oceanic Material
+# Ghostty Theme Config
+palette = 0=#160c0a
+palette = 1=#d1495b
+palette = 2=#8a9a5b
+palette = 3=#e9c46a
+palette = 4=#4f6d7a
+palette = 5=#b56576
+palette = 6=#94d2bd
+palette = 7=#ead8c0
+background = 160c0a
+foreground = ead8c0
+cursor-color = e9c46a
+selection-background = 4f6d7a
+selection-foreground = ffffff
+
 background-opacity = 1.0
-font-size = 16
-cursor-color = #FFC000
-window-padding-balance = true
+cursor-style = block
+cursor-style-blink = true
+window-padding-x = 20
+window-padding-y = 20
 bold-is-bright = true
+
+custom-shader=shaders/cursor_tail.glsl
+
+font-family = "BlexMono Nerd Font Mono"
+font-size = 14
+font-feature = ["ss01", "ss02", "ss03"] # Enables IBM Plex's professional alternates
 
 copy-on-select = clipboard
 window-save-state = always

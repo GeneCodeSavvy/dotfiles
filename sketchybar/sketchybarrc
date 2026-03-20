@@ -118,48 +118,49 @@ bracket_properties=(
 ################################################################################
 
 ##### Adding Left Items #####
-sketchybar --add item eth left  --set eth  "${eth_properties[@]}" \
-           --add item btc left  --set btc  "${btc_properties[@]}"
+# sketchybar --add item eth left  --set eth  "${eth_properties[@]}" \
+#            --add item btc left  --set btc  "${btc_properties[@]}"
 
 ##### Adding Center Items #####
-sketchybar --add item pomodoro center \
+# sketchybar --add item pomodoro center \
+sketchybar --add item pomodoro left \
            --set pomodoro "${pomodoro_properties[@]}" \
            --add event pomodoro_notification \
            --subscribe pomodoro pomodoro_notification \
-           --add item blank center \
-           --add item blank10 center \
-           --add item blank1 center \
-           --add item blank2 center \
-           --add item blank3 center \
-           --add item blank4 center \
-           --add item blank5 center \
-           --add item blank6 center \
-           --add item blank7 center \
-           --add item blank8 center \
-           --add item blank9 center \
+           # --add item blank center \
+           # --add item blank10 center \
+           # --add item blank1 center \
+           # --add item blank2 center \
+           # --add item blank3 center \
+           # --add item blank4 center \
+           # --add item blank5 center \
+           # --add item blank6 center \
+           # --add item blank7 center \
+           # --add item blank8 center \
+           # --add item blank9 center \
 
 ##### Adding Right Items #####
-sketchybar --add item clock right   --set clock   "${clock_properties[@]}" \
-           --add item dates right   --set dates   "${dates_properties[@]}"
-           
-
-
-sketchybar --add item volume right  --set volume  "${volume_properties[@]}" \
-           --subscribe volume volume_change \
-           --add item battery right --set battery "${battery_properties[@]}" \
-           --subscribe battery system_woke power_source_change
-
-sketchybar --add event brew_update \
-           --add item brew right    --set brew    "${brew_properties[@]}" \
-
-sketchybar --add item mic right     --set mic     "${mic_properties[@]}"
-
+# sketchybar --add item clock right   --set clock   "${clock_properties[@]}" \
+#            --add item dates right   --set dates   "${dates_properties[@]}"
+#
+#
+#
+# sketchybar --add item volume right  --set volume  "${volume_properties[@]}" \
+#            --subscribe volume volume_change \
+#            --add item battery right --set battery "${battery_properties[@]}" \
+#            --subscribe battery system_woke power_source_change
+#
+# sketchybar --add event brew_update \
+#            --add item brew right    --set brew    "${brew_properties[@]}" \
+#
+# sketchybar --add item mic right     --set mic     "${mic_properties[@]}"
+#
 ##### Adding Brackets #####
-sketchybar --add bracket crypto eth btc \
-           --set crypto "${bracket_properties[@]}"
-
-sketchybar --add bracket system dates clock volume battery mic brew \
-           --set system "${bracket_properties[@]}"
+# sketchybar --add bracket crypto eth btc \
+#            --set crypto "${bracket_properties[@]}"
+#
+# sketchybar --add bracket system dates clock volume battery mic brew \
+#            --set system "${bracket_properties[@]}"
 
 sketchybar --add bracket pomo pomodoro \
            --set pomo "${bracket_properties[@]}"

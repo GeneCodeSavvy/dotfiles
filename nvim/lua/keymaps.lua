@@ -33,31 +33,22 @@ vim.keymap.set("n", "<leader>4", "<cmd>:buffer 4<CR>", { desc = "Move to buffer 
 vim.keymap.set("n", "<leader>5", "<cmd>:buffer 5<CR>", { desc = "Move to buffer 5" })
 
 -- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
+--  Use <leader>+<hjkl> to switch between windows
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<leader>mh", "<C-w>h", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<leader>ml", "<C-w>l", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<leader>mj", "<C-w>j", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<leader>mk", "<C-w>k", { desc = "Move focus to the upper window" })
+
+-- Window management keymaps
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>wq", "<C-w>q", { desc = "Close current window" })
+vim.keymap.set("n", "<leader>w=", "<C-w>=", { desc = "Make windows equal size" })
+vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Close all other windows" })
 
 -- Disable arrow keys in normal mode
 vim.keymap.set("n", "<left>", '<cmd>echo "Key Disabled"<CR>')
 vim.keymap.set("n", "<right>", '<cmd>echo "Key Disabled"<CR>')
 vim.keymap.set("n", "<up>", '<cmd>echo "Key Disabled"<CR>')
 vim.keymap.set("n", "<down>", '<cmd>echo "Key Disabled"<CR>')
-
--- Open a quick terminal
-local job_id = 0
-vim.keymap.set("n", "<leader>st", function()
-	vim.cmd.vnew() -- Split the window horizontally
-	vim.cmd.term() -- Open terminal
-	vim.cmd.wincmd("J")
-	vim.api.nvim_win_set_height(0, 5)
-
-	job_id = vim.bo.channel
-end, { desc = "Open terminal" })
--- Escape terminal mode and move focus to upper window
-vim.keymap.set("t", "<C-Space>", function()
-	vim.cmd("stopinsert") -- Same as <C-\><C-n>, exits terminal insert mode
-	vim.cmd("wincmd k") -- Moves focus to the window above
-end, { desc = "Escape Terminal and move up" })

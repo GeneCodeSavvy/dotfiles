@@ -11,10 +11,10 @@
         }
     },
     "display": {
-        "separator": "@ ",
+        "separator": " ❯ ",
         "color": {
-            "keys": "1;38;5;220",
-            "title": "italic_underline_yellow"
+            "keys": "yellow",
+            "title": "magenta"
         },
         "bar": {
             "width": 10,
@@ -34,13 +34,15 @@
         {
             "type": "cpu",
             "key": "CPU_temp",
-            "temp":true,
+            "keyColor": "yellow",
+            "temp": true,
             "format": "{temperature}"
         },
         {
             "type": "gpu",
             "key": "GPU_temp",
-            "temp":true,
+            "keyColor": "yellow",
+            "temp": true,
             "format": "{temperature}"
         },
         // "host",
