@@ -13,15 +13,6 @@ return {
 			transparent = false, -- we will set the BG manually below
 			dimInactive = true, -- dims inactive windows
 			terminalColors = true, -- define vim.g.terminal_color_{0..15}
-			colors = {
-				theme = {
-					all = {
-						ui = {
-							bg_gutter = "none", -- Removes the distracting side column
-						},
-					},
-				},
-			},
 			overrides = function(colors)
 				local theme = colors.theme
 				return {

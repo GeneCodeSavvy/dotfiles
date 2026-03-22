@@ -7,7 +7,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 ##### Bar Appearance #####
 sketchybar --hotload true
 sketchybar --bar position=top \
-               height=45 \
+               height=40 \
                blur_radius=0 \
                color=$BAR_COLOR
 
@@ -51,13 +51,15 @@ btc_properties=(
 
 ##### CENTER ITEMS #####
 pomodoro_properties=(
-  icon.padding_right=9
-  icon.font.size=20
+  icon.padding_right=1
+  icon.font.size=16
   script="$PLUGIN_DIR/pomodoro.sh update"
   update_freq=1
   label.align=center
-  icon.padding_left=10
-  label.padding_right=10
+  icon.padding_left=5
+  label.padding_right=5
+  label.font.size=16
+  label.font.family="Monaspace Radon"
 )
 
 ##### RIGHT ITEMS #####
@@ -103,11 +105,11 @@ mic_properties=(
 
 ##### BRACKETS #####
 bracket_properties=(
-  background.color="$GREY"
-  background.height=28
-  background.corner_radius=10
-  background.shadow.distance=12
-  background.shadow.color="0x30000000"
+  background.color="0x30000000"
+  background.height=20
+  background.corner_radius=5
+  background.shadow.distance=1
+  background.shadow.color="0xFF9CAF88"
 )
 
 ################################################################################

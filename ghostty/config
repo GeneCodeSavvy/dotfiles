@@ -26,7 +26,7 @@ custom-shader=shaders/cursor_tail.glsl
 
 font-family = "BlexMono Nerd Font Mono"
 font-size = 14
-font-feature = ["ss01", "ss02", "ss03"] # Enables IBM Plex's professional alternates
+font-feature = ["ss01", "ss02", "ss03", "calt", "liga"] # Enables IBM Plex's professional alternates
 
 copy-on-select = clipboard
 window-save-state = always
