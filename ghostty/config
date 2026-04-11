@@ -19,13 +19,13 @@ background-opacity = 0.8
 cursor-style = block
 cursor-style-blink = true
 window-padding-x = 20
-window-padding-y = 20
+window-padding-y = 10
 bold-is-bright = true
 
 custom-shader=shaders/cursor_tail.glsl
 
 font-family = "BlexMono Nerd Font Mono"
-font-size = 14
+font-size = 15
 font-feature = ["ss01", "ss02", "ss03", "calt", "liga"] # Enables IBM Plex's professional alternates
 
 copy-on-select = clipboard

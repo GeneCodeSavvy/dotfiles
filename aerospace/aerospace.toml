@@ -111,7 +111,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-o = '''exec-and-forget ~/.config/sketchybar/plugins/pomodoro.sh stop'''
     alt-enter = '''exec-and-forget osascript -e ' tell application "Ghostty" to activate' '''
     alt-s = '''exec-and-forget osascript -e ' tell application "Slack" to activate' '''
-    alt-b = '''exec-and-forget osascript -e 'tell application "Google Chrome" to activate' '''
+    alt-b = '''exec-and-forget osascript -e 'tell application "Arc" to activate' '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-slash = 'layout tiles horizontal vertical'
@@ -170,7 +170,7 @@ automatically-unhide-macos-hidden-apps = false
     run = ['layout floating', 'move-node-to-workspace 1' ]
 
 [[on-window-detected]]
-    if.app-id = 'com.google.Chrome'
+    if.app-id = 'company.thebrowser.Browser'
     run = ['layout tiling', 'move-node-to-workspace 2']
 
 [[on-window-detected]]

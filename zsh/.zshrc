@@ -35,7 +35,7 @@ remaining_days() {
 # Execution
 clear
 fastfetch
-remaining_days "2026-04-1"
+remaining_days "2026-04-12"
 
 
 # Set the directory to store Zinit and plugins
