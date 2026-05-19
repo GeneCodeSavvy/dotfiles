@@ -3,10 +3,19 @@ remaining_days() {
 
     # === Calculation Logic ===
     local TODAY=$(date +%s)
-    local TARGET=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +%s)
+    local TARGET
+    local PRETTY_DATE
+
+    if date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +%s >/dev/null 2>&1; then
+        TARGET=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +%s)
+        PRETTY_DATE=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +"%A, %B %d, %Y")
+    else
+        TARGET=$(date -d "$CUSTOM_DATE" +%s)
+        PRETTY_DATE=$(date -d "$CUSTOM_DATE" +"%A, %B %d, %Y")
+    fi
+
     local SECONDS_REMAINING=$(( TARGET - TODAY ))
     local DAYS_REMAINING=$(( SECONDS_REMAINING / 86400 ))
-    local PRETTY_DATE=$(date -j -f "%Y-%m-%d" "$CUSTOM_DATE" +"%A, %B %d, %Y")
     
     if (( DAYS_REMAINING < 0 )); then DAYS_REMAINING=0; fi
 
