@@ -35,7 +35,7 @@ remaining_days() {
 # Execution
 clear
 fastfetch
-remaining_days "2026-04-12"
+remaining_days "2026-05-15"
 
 
 # Set the directory to store Zinit and plugins
@@ -89,6 +89,7 @@ alias vi='nvim'
 alias oc='opencode'
 alias lz='lazygit'
 alias ff='fastfetch'
+alias resume='mv ~/Downloads/Resume.pdf ~/Documents/Resume\ Certificates/resume_harsh.pdf && rsync -avz --rsync-path="sudo rsync" ~/Documents/Resume\ Certificates/resume_harsh.pdf oracle-vm:/srv/'
 
 # Add snippets
 zinit snippet OMZP::git
@@ -100,15 +101,10 @@ zstyle ':completion:*' menu select
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Load nvm
-if [ -f "${HOME}/.nvm/nvm.sh" ]; then
-    source "${HOME}/.nvm/nvm.sh"
-fi
-
 # Shell integrations
-eval "$(starship init zsh)"  # Starship
-eval "$(fzf --zsh)"          # fzf
-eval "$(zoxide init --cmd cd zsh)"  # Zoxide
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"  # Starship
+command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"          # fzf
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd zsh)"  # Zoxide
 
 
 function y() {
@@ -147,3 +143,5 @@ adbd() {
     pnpm db:down
     cd "$tmpd" || return
 }
+
+export GOPATH="$HOME/deeper-love-for-go"
