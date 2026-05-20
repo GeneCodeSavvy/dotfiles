@@ -6,15 +6,6 @@
   home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
-  programs.gpg.enable = true;
-
-  services.gpg-agent = {
-    enable = true;
-    pinentry.package = pkgs.pinentry_mac;
-    defaultCacheTtl = 86400;
-    maxCacheTtl = 86400;
-  };
-
   home.packages = with pkgs; [
     aria2
     autoconf
@@ -78,6 +69,7 @@
     yazi
     zlib
     zoxide
+    ripgrep
 
     claude-code
     codex
