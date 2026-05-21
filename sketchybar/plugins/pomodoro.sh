@@ -89,6 +89,15 @@ read_last_status_line() {
 	tail -n 1 "$HISTORY_FILE"
 }
 
+parse_timestamp_epoch() {
+	local timestamp="$1"
+	if date -d "$timestamp" +"%s" >/dev/null 2>&1; then
+		date -d "$timestamp" +"%s"
+	else
+		/bin/date -j -f "%Y-%m-%d %H:%M:%S" "$timestamp" +"%s"
+	fi
+}
+
 get_current_status() {
 	local last_line
 	last_line=$(read_last_status_line)
@@ -101,7 +110,7 @@ get_current_status() {
 	! is_valid_status "$status_name" && { echo "STAND_BY"; return; }
 
 	local start_time now elapsed duration
-	start_time=$(date -j -f "%Y-%m-%d %H:%M:%S" "$timestamp" +"%s")
+	start_time=$(parse_timestamp_epoch "$timestamp")
 	now=$(date +"%s")
 	elapsed=$((now - start_time))
 	duration=$(( $(get_status_time "$status_name") * 60 ))
@@ -153,10 +162,10 @@ check_and_advance_status_if_needed() {
 	local timestamp="$date_part $time_part"
 
     ! is_valid_status "$status_name" && return
-    [[ "$(get_status_time "$status_name")" -eq 0 ]] && return
+	[[ "$(get_status_time "$status_name")" -eq 0 ]] && return
 
 	local start_time now elapsed_minutes
-	start_time=$(date -j -f "%Y-%m-%d %H:%M:%S" "$timestamp" +"%s")
+	start_time=$(parse_timestamp_epoch "$timestamp")
 	now=$(date +"%s")
 	elapsed_minutes=$(((now - start_time) / 60))
 
@@ -185,7 +194,7 @@ update() {
 		local timestamp="$date_part $time_part"
 
 		local start_time now duration_sec elapsed_sec remaining_sec minutes seconds
-		start_time=$(date -j -f "%Y-%m-%d %H:%M:%S" "$timestamp" +"%s")
+		start_time=$(parse_timestamp_epoch "$timestamp")
 		now=$(date +"%s")
 		duration_sec=$((counter * 60))
 		elapsed_sec=$((now - start_time))
