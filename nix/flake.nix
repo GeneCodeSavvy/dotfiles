@@ -34,11 +34,15 @@
             homebrew = {
               enable = true;
               taps = [
+                "siddharthvaddem/openscreen"
                 "rakalex/mac-brightnessctl"
               ];
               brews = [
                 "cliclick"
                 "mac-brightnessctl"
+              ];
+              casks = [
+                "openscreen"
               ];
             };
 

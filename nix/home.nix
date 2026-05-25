@@ -31,6 +31,7 @@
     glab
     gnupg
     gnuplot
+    go
     graphviz
     htop
     hunspell
@@ -53,7 +54,9 @@
     protobuf
     python313
     redis
+    regal
     resvg
+    ripgrep
     rustup
     p7zip
     starship
@@ -69,7 +72,6 @@
     yazi
     zlib
     zoxide
-    ripgrep
 
     claude-code
     codex
