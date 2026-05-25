@@ -5,6 +5,7 @@ $git_branch\
 $git_state\
 $git_status\
 $python\
+$custom\
 $cmd_duration\
 $line_break\
 $character"""
@@ -55,3 +56,9 @@ style = "#8A9A5B"
 
 [line_break]
 disabled = false
+
+[custom.nix_shell_name]
+command = "printf %s \"$NIX_SHELL_NAME\""
+when = "test -n \"$NIX_SHELL_NAME\""
+format = "via [󱄅 $output]($style) "
+style = "#8A9A5B"
