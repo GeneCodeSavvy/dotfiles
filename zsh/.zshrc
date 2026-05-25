@@ -99,6 +99,7 @@ alias oc='opencode'
 alias lz='lazygit'
 alias ff='fastfetch'
 alias resume='mv ~/Downloads/Resume.pdf ~/Documents/Resume\ Certificates/resume_harsh.pdf && rsync -avz --rsync-path="sudo rsync" ~/Documents/Resume\ Certificates/resume_harsh.pdf oracle-vm:/srv/'
+alias mlx-vlm-server='nix develop /Users/harshsharma/Desktop/100xdevs/work/ocr-for-data-entries#mlx --command mlx_vlm.server --trust-remote-code'
 
 # Add snippets
 zinit snippet OMZP::git
