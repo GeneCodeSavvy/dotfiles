@@ -10,6 +10,7 @@
     aria2
     autoconf
     awscli2
+    aerospace
     bash
     bat
     bc
@@ -79,27 +80,47 @@
     gawk
     gnugrep
     gnumake
+    dbeaver-bin
+    ghostty-bin
+    google-cloud-sdk
+    karabiner-elements
+    keycastr
     neovim
     http-server
     libjpeg
+    monitorcontrol
+    ngrok
+    openscreen
     pinentry_mac
     switchaudio-osx
-
     sketchybar
 
-    (writeShellScriptBin "cliclick" ''
-      exec /opt/homebrew/bin/cliclick "$@"
-    '')
-    (writeShellScriptBin "mac-brightnessctl" ''
-      exec /opt/homebrew/bin/mac-brightnessctl "$@"
-    '')
+    nerd-fonts._0xproto
+    nerd-fonts._3270
+    nerd-fonts.adwaita-mono
+    nerd-fonts.agave
+    nerd-fonts.anonymice
+    nerd-fonts.arimo
+    nerd-fonts.atkynson-mono
+    nerd-fonts.aurulent-sans-mono
+    nerd-fonts.bigblue-terminal
+    nerd-fonts.bitstream-vera-sans-mono
+    nerd-fonts.blex-mono
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.caskaydia-mono
+    nerd-fonts.code-new-roman
+    nerd-fonts.comic-shanns-mono
+    nerd-fonts.commit-mono
+    nerd-fonts.cousine
+    nerd-fonts.hack
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+    nerd-fonts.monaspace
+    nerd-fonts.symbols-only
+    noto-fonts
+
     (writeShellScriptBin "doom" ''
       exec "$HOME/.emacs.d/bin/doom" "$@"
     '')
   ];
-
-  # Managed by nix-darwin Homebrew because they are not present in this
-  # pinned nixpkgs set:
-  # - cliclick
-  # - rakalex/mac-brightnessctl/mac-brightnessctl
 }

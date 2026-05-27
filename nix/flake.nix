@@ -31,21 +31,6 @@
 
             users.users.harshsharma.home = "/Users/harshsharma";
 
-            homebrew = {
-              enable = true;
-              taps = [
-                "siddharthvaddem/openscreen"
-                "rakalex/mac-brightnessctl"
-              ];
-              brews = [
-                "cliclick"
-                "mac-brightnessctl"
-              ];
-              casks = [
-                "openscreen"
-              ];
-            };
-
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.harshsharma = import ./home.nix;
