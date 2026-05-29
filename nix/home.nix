@@ -58,6 +58,7 @@
     regal
     resvg
     ripgrep
+    ruff
     rustup
     p7zip
     starship
