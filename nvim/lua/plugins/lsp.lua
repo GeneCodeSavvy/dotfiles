@@ -260,10 +260,10 @@ return {
 				jinja_lsp = {
 					filetypes = { "jinja", "jinja.html", "html.jinja", "htmldjango", "njk", "nunjucks", "liquid" },
 				},
+				rust_analyzer = {},
 
 				-- clangd = {},
 				-- gopls = {},
-				-- rust_analyzer = {},
 				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 				--
 				-- Some languages (like typescript) have entire language plugins that can be useful:
