@@ -155,3 +155,4 @@ adbd() {
 }
 
 export GOPATH="$HOME/deeper-love-for-go"
+export EDITOR=nvim

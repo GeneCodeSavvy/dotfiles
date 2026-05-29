@@ -27,8 +27,6 @@ path=(
   # Coursier
   "$HOME/Library/Application Support/Coursier/bin"
 
-  # Antigravity
-  "$HOME/.antigravity/antigravity/bin"
   # Preserve whatever was already in PATH
   $path
 )
