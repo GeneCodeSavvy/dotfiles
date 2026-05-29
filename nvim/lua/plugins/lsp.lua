@@ -250,6 +250,9 @@ return {
 					},
 				},
 				ts_ls = { filetypes = {  "typescript", "typescriptreact", "javascript", "javascriptreact" }  },
+				tailwindcss = {
+					filetypes = { "html", "css", "typescriptreact", "javascriptreact" },
+				},
 				html = {
 					filetypes = { "html" },
 				},
