@@ -20,7 +20,6 @@
     coursier
     curl
     dotenvx
-    dvtm
     eget
     entr
     eza
