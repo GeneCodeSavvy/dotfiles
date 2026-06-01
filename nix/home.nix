@@ -7,6 +7,7 @@
 
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
+    abduco
     aria2
     autoconf
     awscli2
@@ -19,6 +20,7 @@
     coursier
     curl
     dotenvx
+    dvtm
     eget
     entr
     eza
