@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   home.username = "harshsharma";
@@ -82,6 +82,7 @@
     gawk
     gnugrep
     gnumake
+    inputs."hermes-agent".packages.${pkgs.system}.default
     dbeaver-bin
     ghostty-bin
     google-cloud-sdk
