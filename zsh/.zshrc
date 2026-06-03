@@ -153,6 +153,9 @@ adbd() {
     pnpm db:down
     cd "$tmpd" || return
 }
+if [[ -n "$SSH_CONNECTION" && "$TERM" == "xterm-ghostty" ]]; then
+    export TERM=xterm-256color
+fi
 
 export GOPATH="$HOME/deeper-love-for-go"
 export EDITOR=nvim
