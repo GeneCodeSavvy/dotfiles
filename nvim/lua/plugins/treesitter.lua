@@ -11,8 +11,32 @@ local treesitter_languages = {
 	"vim",
 	"vimdoc",
 	"css",
+	"javascript",
+	"python",
+	"tsx",
 	"typescript",
 	"jinja",
+}
+
+local treesitter_filetypes = {
+	"bash",
+	"c",
+	"css",
+	"diff",
+	"html",
+	"javascript",
+	"jinja",
+	"lua",
+	"luadoc",
+	"njk",
+	"python",
+	"query",
+	"sh",
+	"tsx",
+	"typescript",
+	"typescriptreact",
+	"vim",
+	"vimdoc",
 }
 
 return { -- Highlight, edit, and navigate code
@@ -28,7 +52,7 @@ return { -- Highlight, edit, and navigate code
 			treesitter.install(treesitter_languages)
 
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = treesitter_languages,
+				pattern = treesitter_filetypes,
 				callback = function()
 					pcall(vim.treesitter.start)
 					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
