@@ -37,6 +37,7 @@
     graphviz
     htop
     hunspell
+    python3Packages.huggingface-hub
     jq
     lazydocker
     lazygit
