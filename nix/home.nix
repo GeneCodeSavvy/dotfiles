@@ -1,5 +1,13 @@
 { pkgs, inputs, ... }:
 
+let
+  opencode = inputs.opencode.packages.${pkgs.system}.default.overrideAttrs (old: {
+    postPatch = (old.postPatch or "") + ''
+      substituteInPlace package.json \
+        --replace-fail '"packageManager": "bun@1.3.14"' '"packageManager": "bun@1.3.13"'
+    '';
+  });
+in
 {
   home.username = "harshsharma";
   home.homeDirectory = "/Users/harshsharma";
@@ -49,7 +57,9 @@
     ollama
     opencode
     pandoc
-    pipx
+    (pipx.overridePythonAttrs (_: {
+      doCheck = false;
+    }))
     pngpaste
     pnpm
     poppler

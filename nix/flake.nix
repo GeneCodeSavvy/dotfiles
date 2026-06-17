@@ -9,6 +9,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     "hermes-agent".url = "github:NousResearch/hermes-agent";
     "hermes-agent".inputs.nixpkgs.follows = "nixpkgs";
+    opencode.url = "github:anomalyco/opencode";
+    opencode.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }:
