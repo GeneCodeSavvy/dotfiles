@@ -7,6 +7,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }:
@@ -21,10 +22,23 @@
         inherit system;
 
         modules = [
+          inputs.nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
             nix.enable = false;
+
+            nix-homebrew = {
+              enable = true;
+              user = "harshsharma";
+            };
+
+            homebrew = {
+              enable = true;
+              casks = [
+                "opensuperwhisper"
+              ];
+            };
 
             system.primaryUser = "harshsharma";
             system.stateVersion = 7;
