@@ -15,12 +15,7 @@ ambiguous, go to `shape`; if the failure is not understood, go to `diagnose`.
 ## Process
 
 1. State assumptions, success criteria, and the smallest useful change.
-2. Pick the source workflow:
-   - `test-driven-development` for strict red-green-refactor.
-   - `tdd` for repo-local behavior-first and integration-style testing.
-   - `implement` when executing a PRD or issue.
-   - `migrate-to-shoehorn` for test data assertion migration.
-   - `scaffold-exercises` for exercise folder scaffolding.
+2. Use the `implement` skill
 3. Write or identify the failing test before production behavior changes unless
    the task is docs-only, config-only, or explicitly exempted.
 4. Make the smallest production change that satisfies the test.
