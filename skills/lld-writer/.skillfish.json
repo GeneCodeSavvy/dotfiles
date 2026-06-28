@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "lld-writer",
+  "owner": "testany-io",
+  "repo": "testany-agent-skills",
+  "path": "plugins/testany-eng/skills/lld-writer",
+  "branch": "main",
+  "sha": "05d145ddd16133608c48f6054270de8c01a9e5e5",
+  "source": "manual"
+}
