@@ -14,32 +14,60 @@ or bugfix.
 
 ## Process
 
-1. Confirm the design question and the decision that needs to be made.
-2. Load the narrowest relevant docs and code.
-3. Choose the smallest fitting design reference:
+1. Classify the design job before loading another skill. Identify:
+   - the decision needed: architecture, module boundary, interface, HLD, LLD,
+     component API, refactor plan, or architecture opportunity scan
+   - the design driver: scale, coupling, testability, migration risk,
+     performance, user experience, framework constraint, or unclear tradeoff
+   - the next phase likely needed: `build`, `coordinate`, or `finish`
+
+2. Load only the narrowest relevant docs and code needed to answer that design
+   question.
+
+3. Load the smallest fitting source workflow:
    - `hld-design` for production architecture and system design.
    - `lld-writer` after PRD, HLD, or API contract exists.
    - `codebase-design` for deep modules, boundaries, and testability.
    - `design-an-interface` for multiple API or module interface options.
    - `improve-codebase-architecture` for architecture opportunity scans.
-   - `request-refactor-plan` for incremental refactor plans.
-4. State tradeoffs explicitly and recommend one path.
-5. Record durable architectural decisions as ADRs only when they are hard to
-   reverse, surprising without context, and tradeoff-driven.
+   - `grill-with-docs` when tradeoffs or decisions are not covered by existing
+     docs or PRDs and need interview-driven clarification with documentation
+     updates.
 
-## Specialist Branches
+4. Add specialist branches only when their trigger is present:
+   - `firecrawl` when current external technical docs or framework references
+     are needed and Firecrawl is the chosen collection path.
+   - `prompt-architect` for prompt/system-message design.
+   - `hallmark` for UI design quality.
+   - `landing-page-conversion` for landing-page structure and conversion design.
+   - `web-animation-design` for motion design.
+   - `vercel-react-best-practices` for React or Next.js architecture/performance.
+   - `vercel-composition-patterns` for React component APIs.
+   - `vercel-react-view-transitions` for React View Transition API design.
+   - `prototype` when a spike is needed to resolve feasibility.
+   - `lavish` when the design has more than three moving parts, or the design
+     output is complex or visual enough to benefit from an HTML review artifact.
 
-- `firecrawl` for current external technical docs or framework references.
-- `prompt-architect` for prompt/system-message design.
-- `hallmark` for UI design quality.
-- `landing-page-conversion` for landing-page structure and conversion design.
-- `web-animation-design` for motion design.
-- `vercel-react-best-practices` for React or Next.js architecture/performance.
-- `vercel-composition-patterns` for React component APIs.
-- `vercel-react-view-transitions` for React View Transition API design.
-- `prototype` when a spike is needed to resolve feasibility.
+5. When multiple skills apply, sequence them by dependency:
+   - inspect repo context before choosing architecture or interface shape
+   - clarify missing tradeoffs or decisions with `grill-with-docs` before
+     choosing a design path
+   - gather external evidence with firecrawl or use prototype only for questions that block the
+     design
+   - compare alternatives before recommending one path
+   - do not create implementation plans or code until the design is approved or
+     clearly sufficient
+
+6. Before proceeding, state the selected route in one sentence:
+   `Route: <skills> -> <design artifact>, because <reason>.`
+
+7. Before ending the design phase, check whether the final design has more than
+   three moving parts or is complex/visual enough to benefit from HTML review.
+   If yes, present the final design as a Lavish HTML artifact. If no, a prose
+   design artifact is sufficient.
 
 ## Completion
 
 Done when the design names the chosen structure, the rejected alternatives, the
-main tradeoffs, and the next phase.
+main tradeoffs, the next phase, and any required Lavish HTML artifact has been
+presented.
