@@ -13,6 +13,10 @@ When you have multiple unrelated failures (different test files, different subsy
 
 **Core principle:** Dispatch one agent per independent problem domain. Let them work concurrently.
 
+**Codex tool mapping:** dispatch each independent task with `spawn_agent`, collect results with `wait_agent`, and call `close_agent` for completed agents.
+
+**Context rule:** omit `fork_context` or set `fork_context=false` when each agent receives a self-contained prompt. Use `fork_context=true` only for investigations that require the exact current conversation or unrepeated tool context.
+
 ## When to Use
 
 ```dot
@@ -65,12 +69,12 @@ Each agent gets:
 
 ### 3. Dispatch in Parallel
 
-```typescript
-// In Claude Code / AI environment
-Task("Fix agent-tool-abort.test.ts failures")
-Task("Fix batch-completion-behavior.test.ts failures")
-Task("Fix tool-approval-race-conditions.test.ts failures")
-// All three run concurrently
+```text
+spawn_agent(message="Fix agent-tool-abort.test.ts failures", fork_context=false)
+spawn_agent(message="Fix batch-completion-behavior.test.ts failures", fork_context=false)
+spawn_agent(message="Fix tool-approval-race-conditions.test.ts failures", fork_context=false)
+
+All three run concurrently.
 ```
 
 ### 4. Review and Integrate

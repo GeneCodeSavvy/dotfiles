@@ -11,11 +11,13 @@ You are reviewing code changes for production readiness.
 
 ## What Was Implemented
 
+{WHAT_WAS_IMPLEMENTED}
+
 {DESCRIPTION}
 
 ## Requirements/Plan
 
-{PLAN_REFERENCE}
+{PLAN_OR_REQUIREMENTS}
 
 ## Git Range to Review
 

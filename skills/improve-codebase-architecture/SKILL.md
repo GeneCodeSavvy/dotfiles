@@ -19,7 +19,7 @@ This command is _informed_ by the project's domain model and built on a shared d
 
 Read the project's domain glossary (`CONTEXT.md`) and any ADRs in the area you're touching first.
 
-Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid heuristics — explore organically and note where you experience friction:
+Then use a codebase exploration subagent to walk the codebase. In Codex, use `spawn_agent(agent_type="explorer", message=..., fork_context=false)` for a self-contained exploration brief. Use `fork_context=true` only when the explorer must inherit exact prior conversation that cannot be restated. Don't follow rigid heuristics — explore organically and note where you experience friction:
 
 - Where does understanding one concept require bouncing between many small modules?
 - Where are modules **shallow** — interface nearly as complex as the implementation?
