@@ -32,7 +32,8 @@ Use lavish-axi when the user asks for a visual artifact, HTML explainer, interac
 ## Workflow
 
 1. Choose the artifact path:
-   - Default to a single portable HTML file at `.lavish/<name>.html`.
+   - Default to a fresh per-artifact directory under `/tmp`, for example `/tmp/lavish-<name>-<timestamp>/<name>.html`.
+   - Include a timestamp or unique suffix in the directory name so each run starts from a new file and never resumes stale `.lavish/` artifacts.
    - Use the advanced React builder only when the artifact needs complex state, routing, or shadcn/ui.
 2. Create or bundle the HTML artifact.
 3. Run `npx -y lavish-axi <html-file>` to open or resume a review session in the browser.
@@ -40,7 +41,7 @@ Use lavish-axi when the user asks for a visual artifact, HTML explainer, interac
    The poll stays silent until the user acts or the real browser reports fresh layout warnings - leave it running, never kill it.
    If your harness limits how long a foreground command may run, run the poll as a background task; if it gets killed or times out anyway, just re-run it - queued feedback is never lost.
 5. If poll returns `layout_warnings`, fix overflow, clipped text, or overlapping unreadable content and re-check before involving the human.
-6. Apply human feedback, then poll again with `--agent-reply "<message>"` to reply in the browser and keep the loop going.
+6. If poll returns user feedback, do not treat a normal chat reply as sufficient. Apply any requested change, or explicitly decide that no file change is needed, then immediately run `npx -y lavish-axi poll <html-file> --agent-reply "<message>"` so the browser session receives the acknowledgement and the feedback loop stays open.
 7. Run `npx -y lavish-axi end <html-file>` when the review is finished.
 
 ## Advanced React builder
@@ -53,21 +54,21 @@ The bundled builder creates a React 18 + TypeScript + Vite project with Tailwind
 2. Initialize a throwaway artifact project:
 
    ```bash
-   bash <lavish-skill-dir>/scripts/web-artifacts-builder/init-artifact.sh .lavish/<artifact-name>
+   bash <lavish-skill-dir>/scripts/web-artifacts-builder/init-artifact.sh /tmp/lavish-<artifact-name>-<timestamp>
    ```
 
 3. Build the artifact by editing the generated React project.
 4. Bundle it to one portable HTML file from inside the generated project:
 
    ```bash
-   cd .lavish/<artifact-name>
+   cd /tmp/lavish-<artifact-name>-<timestamp>
    bash <lavish-skill-dir>/scripts/web-artifacts-builder/bundle-artifact.sh
    ```
 
 5. Open the bundled artifact in Lavish:
 
    ```bash
-   npx -y lavish-axi .lavish/<artifact-name>/bundle.html
+   npx -y lavish-axi /tmp/lavish-<artifact-name>-<timestamp>/bundle.html
    ```
 
 6. Continue with the normal `poll`, layout-warning, feedback, and `end` loop.
@@ -98,9 +99,10 @@ For flows, architecture, state, or sequence diagrams, do not hand-build boxes-an
 ## Commands & rules
 
 - Run `npx -y lavish-axi <html-file>` to open or resume a Lavish Editor session
-- Unless the user specifies another location, create HTML artifacts in the current working directory under `.lavish/`
+- Unless the user specifies another location, create HTML artifacts in a fresh per-artifact directory under `/tmp`, for example `/tmp/lavish-<name>-<timestamp>/`. Do not use or reuse `.lavish/` as the default artifact location.
 - Lavish serves the html file through a local express.js server. If your html needs to reference other filesystem assets such as images, CSS, fonts, and local scripts, copy them into the same directory as the HTML file, then reference them with relative paths from that directory. Never prepend `/` to those asset paths - root paths won't work
 - Run `npx -y lavish-axi poll <html-file>` to wait for user feedback or browser-reported layout_warnings. It long-polls and stays silent until the user sends feedback, ends the session, or the real browser reports fresh layout_warnings, so leave it running - never kill it. Fix layout_warnings before involving the human. If your harness limits how long a foreground command may run, run the poll as a background task; if it gets killed or times out anyway, just re-run it - queued feedback is never lost
+- When poll returns user feedback, always send the acknowledgement or result back through `npx -y lavish-axi poll <html-file> --agent-reply "<message>"` before finalizing in chat, even when the feedback only says the artifact is good and no edits are needed.
 - Run `npx -y lavish-axi end <html-file>` to end a session
 - Run `npx -y lavish-axi stop` to shut down the background server (it also self-stops when idle or after the last session ends with nothing connected)
 - Run `npx -y lavish-axi playbook <playbook_id>` for focused artifact guidance. One artifact often combines several playbooks (for example a plan that includes a comparison and a diagram), so MUST open each matching playbook before writing HTML.
