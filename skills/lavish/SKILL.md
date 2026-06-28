@@ -13,7 +13,7 @@ metadata:
 
 Lavish Editor helps agents turn rich HTML artifacts into collaborative human review surfaces. Whenever you are about to give user a complex response that will be easier to understand via a rich / interactive page, consider using Lavish Editor. First generate an interactive HTML artifact according to user request, then run `npx -y lavish-axi <html-file>` so the user can visually review it, annotate elements or selected text, queue prompts, and send feedback back through `npx -y lavish-axi poll`.
 
-For simple artifacts, write a portable single HTML file directly. For complex artifacts that need React state management, routing, Tailwind CSS, or shadcn/ui components, use the bundled Web Artifacts Builder scripts in `scripts/web-artifacts-builder/`, then pass the bundled HTML output to lavish-axi.
+For simple artifacts, write a portable single HTML file directly. For complex artifacts that need React state management, routing, Tailwind CSS, or shadcn/ui components, use the bundled Web Artifacts Builder scripts in `scripts/`, then pass the bundled HTML output to lavish-axi.
 
 You do not need lavish-axi installed globally - invoke it with `npx -y lavish-axi <html-file>`.
 If lavish-axi output shows a follow-up command starting with `lavish-axi`, run it as `npx -y lavish-axi ...` instead.
@@ -54,7 +54,7 @@ The bundled builder creates a React 18 + TypeScript + Vite project with Tailwind
 2. Initialize a throwaway artifact project:
 
    ```bash
-   bash <lavish-skill-dir>/scripts/web-artifacts-builder/init-artifact.sh /tmp/lavish-<artifact-name>-<timestamp>
+   bash <lavish-skill-dir>/scripts/init-artifact.sh /tmp/lavish-<artifact-name>-<timestamp>
    ```
 
 3. Build the artifact by editing the generated React project.
@@ -62,7 +62,7 @@ The bundled builder creates a React 18 + TypeScript + Vite project with Tailwind
 
    ```bash
    cd /tmp/lavish-<artifact-name>-<timestamp>
-   bash <lavish-skill-dir>/scripts/web-artifacts-builder/bundle-artifact.sh
+   bash <lavish-skill-dir>/scripts/bundle-artifact.sh
    ```
 
 5. Open the bundled artifact in Lavish:
@@ -73,7 +73,7 @@ The bundled builder creates a React 18 + TypeScript + Vite project with Tailwind
 
 6. Continue with the normal `poll`, layout-warning, feedback, and `end` loop.
 
-Builder requirements: Node.js 18 or newer, `pnpm`, and network access for package installation. The scripts are vendored from Anthropic's `web-artifacts-builder` skill and keep the upstream license in `scripts/web-artifacts-builder/LICENSE.txt`.
+Builder requirements: Node.js 18 or newer, `pnpm`, and network access for package installation. The scripts are vendored from Anthropic's `web-artifacts-builder` skill and keep the upstream license in `scripts/LICENSE.txt`.
 
 ## Visual guidance
 
