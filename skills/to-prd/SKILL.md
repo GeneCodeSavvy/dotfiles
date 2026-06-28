@@ -52,7 +52,7 @@ A list of implementation decisions that were made. This can include:
 - API contracts
 - Specific interactions
 
-Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
+Do NOT include specific file paths or code snippets. They may end up being outdated very quickly. This section gives general direction, so avoid using strong assertive language.
 
 Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.
 
