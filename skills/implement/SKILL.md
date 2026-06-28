@@ -14,4 +14,6 @@ Run typechecking regularly, single test files regularly, and the full test suite
 
 Once done, use /review to review the work.
 
+Finally, create a `qa` plan for a human to QA the completed work.
+
 Commit your work to the current branch.

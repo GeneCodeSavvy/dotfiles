@@ -9,7 +9,7 @@ Turn loose intent into a precise, approved artifact before implementation.
 
 ## Boundary
 
-Shape ends at an approved spec, PRD, issue breakdown, decision map, glossary
+Shape ends at an approved spec, issue breakdown, decision map, glossary
 update, or ADR candidate. It does not implement.
 
   ## Process
@@ -24,8 +24,6 @@ update, or ADR candidate. It does not implement.
      - `grill-with-docs` when the plan lives in a codebase and glossary terms, ADR candidates, or domain decisions may need to be captured.
      - `loop-me` when the artifact is a repeatable workflow spec for `docs/workflows/*.md`.
      - `decision-mapping` when the idea has enough fog of war to require ordered research, prototype, or grilling tickets across multiple sessions.
-     - `to-prd` when the conversation is already settled enough to synthesize a PRD. Do not interview first unless a blocking gap remains.
-     - `to-issues` when an approved plan, spec, or PRD needs independently grabbable implementation issues.
 
   3. Add specialist branches only when their trigger is present:
      - `firecrawl` when current external docs, websites, or web evidence are needed and Firecrawl is the chosen collection path.

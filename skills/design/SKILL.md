@@ -54,9 +54,11 @@ or bugfix.
      choosing a design path
    - gather external evidence with firecrawl or use prototype only for questions that block the
      design
-   - compare alternatives before recommending one path
+   - compare alternatives before recommending one path, read the concept of deep modules in `improve-codebase-architecture`
    - do not create implementation plans or code until the design is approved or
      clearly sufficient
+   - choose, `to-prd` when the conversation is already settled enough to synthesize a PRD. Do not interview first unless a blocking gap remains.
+   - choose, `to-issues` when an approved plan, spec, or PRD needs independently grabbable implementation issues.
 
 6. Before proceeding, state the selected route in one sentence:
    `Route: <skills> -> <design artifact>, because <reason>.`
