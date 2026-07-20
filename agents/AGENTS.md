@@ -92,7 +92,7 @@ Recommend a next skill only at a natural conversation boundary, not during an ac
 Use the subagent when the human explicitly asks the agent. Don't spawn subagents eagerly
 
 # General Repository Guidelines
-This is the recommended way to do things. If you don't find the repository setup this way, surface it to the human. Recommending "setup-repository-for-agents" skill
+This is the recommended way to do things. If you don't find the repository setup this way, surface it to the human. Recommend the `setup-matt-pocock-skills` skill.
 
 ## Issue tracker
 Issues and PRDs are tracked in GitHub Issues; external PRs are not a triage request surface. See `docs/agents/issue-tracker.md`.
@@ -105,3 +105,17 @@ Domain docs use a multi-context layout with `CONTEXT-MAP.md` at the repo root an
 
 ## Code Guidelines
 Read `./CODE_GUIDELINES.md` and explictly confirm with a message : "Read CODE_GUIDELINES.md" before every write attempt
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs are tracked in GitHub Issues; external PRs are not a triage request surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Triage uses the default five-label vocabulary. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Domain docs use a multi-context layout. See `docs/agents/domain.md`.
