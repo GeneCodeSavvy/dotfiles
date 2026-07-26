@@ -43,8 +43,8 @@ let
     version = "0.8.1";
 
     src = pkgs.fetchurl {
-      url = "https://github.com/DeusData/codebase-memory-mcp/releases/download/v0.8.1/codebase-memory-mcp-darwin-arm64.tar.gz";
-      hash = "sha256-+9BHUJhSAhtURqERQbywo9Hcrr9uURJGCWDynwUsHFg=";
+      url = "https://github.com/DeusData/codebase-memory-mcp/releases/download/v0.9.0/codebase-memory-mcp-darwin-arm64.tar.gz";
+      hash = "sha256:faa02f0404230c451a9812230394481948f80183801fa5bf67044b41c2f25ed4";
     };
 
     sourceRoot = ".";
