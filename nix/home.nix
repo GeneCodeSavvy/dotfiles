@@ -77,7 +77,9 @@ in
     coreutils
     coursier
     curl
+    docker
     docker-compose
+    docker-credential-helpers
     dotenvx
     eget
     entr
@@ -111,7 +113,15 @@ in
     opencode
     open-code-review
     pandoc
-    pipx
+    # the pinned pipx 1.14.0 source has bugs, so the temp fix
+    (pipx.overridePythonAttrs (old: {
+      postPatch = (old.postPatch or "") + ''
+        substituteInPlace tests/test_inject.py \
+          --replace-fail '"pkg_spec,"' '"pkg_spec"' \
+          --replace-fail '"with_suffix,"' '"with_suffix"' \
+          --replace-fail '"with_packages,"' '"with_packages"'
+      '';
+    }))
     pngpaste
     pnpm
     poppler

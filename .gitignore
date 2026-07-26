@@ -20,3 +20,6 @@ gcloud
 git
 jgit
 /firecrawl
+/tokscale/cache
+/tokscale/codex-credentials.json
+/tokscale/codex-credentials.lock
