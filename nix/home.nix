@@ -1,5 +1,63 @@
 { pkgs, ... }:
 
+let
+  grok-cli = pkgs.stdenvNoCC.mkDerivation {
+    pname = "grok-cli";
+    version = "0.2.93";
+
+    src = pkgs.fetchurl {
+      url = "https://x.ai/cli/grok-0.2.93-macos-aarch64";
+      hash = "sha256-Kpe6Z1vZkqqbmB4ug3dkYNlPRptRDAuO/ii1DSNtdnw=";
+    };
+
+    dontUnpack = true;
+
+    installPhase = ''
+      runHook preInstall
+      install -Dm755 "$src" "$out/bin/grok"
+      ln -s grok "$out/bin/agent"
+      runHook postInstall
+    '';
+  };
+
+  open-code-review = pkgs.stdenvNoCC.mkDerivation {
+    pname = "open-code-review";
+    version = "1.6.6";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/alibaba/open-code-review/releases/download/v1.6.6/opencodereview-darwin-arm64";
+      hash = "sha256-rCcewegYHsr803A3sQTVMNOwS6JYVGP4JHwjaVNOCNA=";
+    };
+
+    dontUnpack = true;
+
+    installPhase = ''
+      runHook preInstall
+      install -Dm755 "$src" "$out/bin/ocr"
+      runHook postInstall
+    '';
+  };
+
+  codebase-memory-mcp = pkgs.stdenvNoCC.mkDerivation {
+    pname = "codebase-memory-mcp";
+    version = "0.8.1";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/DeusData/codebase-memory-mcp/releases/download/v0.8.1/codebase-memory-mcp-darwin-arm64.tar.gz";
+      hash = "sha256-+9BHUJhSAhtURqERQbywo9Hcrr9uURJGCWDynwUsHFg=";
+    };
+
+    sourceRoot = ".";
+
+    installPhase = ''
+      runHook preInstall
+      install -Dm755 codebase-memory-mcp "$out/bin/codebase-memory-mcp"
+      install -Dm644 LICENSE "$out/share/doc/codebase-memory-mcp/LICENSE"
+      install -Dm644 THIRD_PARTY_NOTICES.md "$out/share/doc/codebase-memory-mcp/THIRD_PARTY_NOTICES.md"
+      runHook postInstall
+    '';
+  };
+in
 {
   home.username = "harshsharma";
   home.homeDirectory = "/Users/harshsharma";
@@ -19,6 +77,7 @@
     coreutils
     coursier
     curl
+    docker-compose
     dotenvx
     eget
     entr
@@ -34,6 +93,7 @@
     gnupg
     gnuplot
     go
+    grok-cli
     graphviz
     htop
     hunspell
@@ -49,6 +109,7 @@
     nodejs_22
     ollama
     opencode
+    open-code-review
     pandoc
     pipx
     pngpaste
@@ -77,8 +138,8 @@
     zlib
     zoxide
 
-    claude-code
     codex
+    codebase-memory-mcp
     emacs
     gawk
     gnugrep
@@ -93,7 +154,6 @@
     libjpeg
     monitorcontrol
     ngrok
-    openscreen
     pinentry_mac
     switchaudio-osx
     sketchybar
@@ -126,4 +186,6 @@
       exec "$HOME/.emacs.d/bin/doom" "$@"
     '')
   ];
+
+  services.colima.enable = true;
 }
