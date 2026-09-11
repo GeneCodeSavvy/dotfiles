@@ -76,18 +76,6 @@ return {
 				html = { "htmlbeautifier" },
 				jinja = { "djlint" },
 			},
-
-			formatters = {
-				-- You can also define your own formatters
-				ruff_format = {
-					append_args = {
-						"--config",
-						"format.quote-style = 'single'",
-						"--config",
-						"line-length=119",
-					},
-				},
-			},
 		},
 	},
 }

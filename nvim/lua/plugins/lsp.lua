@@ -231,19 +231,33 @@ return {
 				-- 	},
 				-- },
 				pyright = {
-					-- Disable Pyright diagnostics capability
-					capabilities = {
-						textDocument = {
-							publishDiagnostics = false,
-						},
+					root_markers = {
+						"pyrightconfig.json",
+						"pyproject.toml",
+						"setup.py",
+						"setup.cfg",
+						"requirements.txt",
+						"Pipfile",
+						".git",
 					},
+					on_init = function(client)
+						if not client.config.root_dir then
+							return
+						end
+
+						local python_path = vim.fs.joinpath(client.config.root_dir, ".venv", "bin", "python")
+						if vim.fn.executable(python_path) == 1 then
+							client.settings = vim.tbl_deep_extend(
+								"force",
+								client.settings or {},
+								{ python = { pythonPath = python_path } }
+							)
+							client:notify("workspace/didChangeConfiguration", { settings = nil })
+						end
+					end,
 					settings = {
 						python = {
-							venvPath = ".",
-							venv = ".venv",
-							pythonPath = ".venv/bin/python",
 							analysis = {
-								typeCheckingMode = "on",
 								diagnosticMode = "openFilesOnly",
 							},
 						},

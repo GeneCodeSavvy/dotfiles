@@ -44,7 +44,7 @@ remaining_days() {
 # Execution
 clear
 fastfetch
-remaining_days "2026-06-7"
+remaining_days "2026-06-30"
 
 
 # Set the directory to store Zinit and plugins
@@ -95,7 +95,7 @@ alias l='eza -la'
 alias c='clear'
 alias org='cd org && emacs &'
 alias vi='nvim'
-alias oc='opencode'
+alias cod='codex'
 alias lz='lazygit'
 alias ff='fastfetch'
 alias resume='mv ~/Downloads/Resume.pdf ~/Documents/Resume\ Certificates/resume_harsh.pdf && rsync -avz --rsync-path="sudo rsync" ~/Documents/Resume\ Certificates/resume_harsh.pdf oracle-vm:/srv/'
@@ -156,3 +156,16 @@ adbd() {
 
 export GOPATH="$HOME/deeper-love-for-go"
 export EDITOR=nvim
+
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+    *":$PNPM_HOME/bin:"*) ;;
+    *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+
+case ":$PATH:" in
+    *":$HOME/.npm-global/bin:"*) ;;
+    *) export PATH="$HOME/.npm-global/bin:$PATH" ;;
+esac
+
+export AGENTMEMORY_III_CONFIG="$HOME/.agentmemory/iii-config.yaml"
