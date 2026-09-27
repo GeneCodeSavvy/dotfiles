@@ -1,238 +1,59 @@
 ---
 name: hld-design
-description: "7-phase High-Level Design framework: clarify requirements, estimate scale, design components, model data, define APIs, deep dive on bottlenecks, and enumerate failure modes. Use for any system design question or production architecture task."
+description: Shape a high-level system design through a phased, one-question-at-a-time interview. Use when the user wants an HLD or production architecture developed from rough ideas and constraints, not for a narrow architecture answer or code-level LLD.
 ---
 
-## High-Level Design (HLD) Framework
+# High-Level Design
 
-Structured methodology for designing production systems. Works for interview prep and real architecture decisions. Each phase builds on the last — skip none.
+Help the user turn raw thoughts into explicit architecture decisions. Begin by inviting an unstructured dump of goals, constraints, worries, examples, and ideas. If the user has already provided one, use it; do not make them fill out a form or repeat themselves.
 
-### Context
+Reflect the dump back as confirmed requirements, tentative assumptions, and open decisions. Preserve the user's wording where it carries domain meaning. Do not silently convert an idea into a requirement. Ask about the highest-impact uncertainty first.
 
-System to design: **$ARGUMENTS**
+## Interview method
 
-If no system is provided, ask: "What system are you designing? What's the scale and key constraints?"
+Work through the seven phases below in order, revisiting an earlier decision when a later answer changes it. For each phase:
 
----
+1. State what is already known and the decision the phase needs to settle.
+2. Ask **one question at a time** and wait for the answer. Give a recommended answer with a reason tied to the user's constraints, current system, or evidence. Offer concrete alternatives when a real tradeoff exists.
+3. Follow the user's answer down its dependencies before moving on. Ask only questions that affect the design; investigate facts that code, documentation, or research can answer instead of asking the user.
+4. Record the decision, its rationale, and any remaining uncertainty in a running design summary. Distinguish the user's choices from the agent's recommendations.
 
-### Phase 1: Clarify Requirements (5 min)
+Do not present a finished architecture while key decisions remain open. Push back when a choice conflicts with a stated constraint, and explain the tradeoff plainly. Depth follows the problem; the phase prompts are topics to resolve, not a checklist to recite.
 
-Never design in a vacuum. Extract:
+## Research for brainstorming
 
-**Functional requirements** — what the system must do:
-- Core user-facing features (list 3-5 specific capabilities)
-- What does success look like for the user?
+Use web search when it helps discover architecture options, operational experiences, or failure modes. Medium, Reddit, Stack Overflow, and other practitioner forums can suggest alternatives and questions to test. Treat those discussions as leads, not proof or design authority. Check concrete technical claims against primary sources such as official documentation, standards, and research papers; check project-specific claims against the current code and docs. Share useful links and say which conclusions are evidence-backed versus your inference. Do not import a fashionable pattern without showing why the user's constraints need it.
 
-**Non-functional requirements** — how the system must perform:
-- Scale: DAU, QPS (reads vs writes), data volume
-- Latency: p50/p99 targets (e.g., "search results < 200ms p99")
-- Availability: 99.9% (8.7h downtime/year) vs 99.99% (52min/year)
-- Consistency: strong vs eventual — where does it matter?
-- Durability: what data cannot be lost?
+## Phases
 
-**Constraints and assumptions:**
-- Read-heavy or write-heavy? (affects caching and replication strategy)
-- Global or regional? (affects latency, data residency, CDN needs)
-- Expected growth: 2x in 6 months? 10x in 2 years?
+### 1. Requirements and constraints
 
-**Out of scope** — explicitly state what you're NOT designing.
+Start from the raw dump. Resolve the system's purpose, actors, essential behaviors, success criteria, boundaries, and non-functional constraints. Separate hard constraints from preferences and unknowns. State what is out of scope. Move on when the design problem is clear enough to compare architectures.
 
----
+### 2. Scale and capacity
 
-### Phase 2: Capacity Estimation (5 min)
+Estimate only quantities that can change a decision: request and write rates, peak behavior, data size and growth, latency, availability, consistency, or durability as relevant. Ask for missing numbers one at a time and recommend a defensible assumption when exact figures are unavailable. Show the calculation and sensitivity; do not invent precise targets or apply stock multipliers as facts.
 
-Back-of-envelope numbers that drive architecture decisions. Quantify before designing.
+### 3. Components and boundaries
 
-**Traffic:**
-```
-DAU = X million
-Reads per user per day = Y
-Writes per user per day = Z
+Compare credible component shapes and ownership boundaries against the requirements and scale. Resolve the main request, event, and data paths, plus dependency direction. Recommend the least complex architecture that satisfies the known constraints. Draw a high-level diagram after the boundaries are settled; do not start from a default stack of infrastructure boxes.
 
-Read QPS  = DAU × Y / 86,400
-Write QPS = DAU × Z / 86,400
-Peak QPS  = avg × 3-5x (account for traffic spikes)
-```
+### 4. Data model and ownership
 
-**Storage:**
-```
-Object size = X KB (e.g., tweet = ~300 bytes, image = ~200 KB)
-Daily writes = Write QPS × 86,400
-3-year storage = Daily writes × 365 × 3
-```
+Identify core domain concepts, authoritative stores, important relationships, access patterns, and consistency boundaries. Settle storage and indexing choices only where the HLD needs them. Leave field-level schemas and implementation types for LLD unless they decide an architectural tradeoff.
 
-**Bandwidth:**
-```
-Inbound  = Write QPS × avg object size
-Outbound = Read QPS × avg response size
-```
+### 5. External contracts
 
-**Cache:**
-```
-Hot data = 20% of reads hit 80% of data (Pareto)
-Cache size = hot data × avg object size
-```
+Resolve the boundaries between clients, services, and external systems: operations or events, sync versus async behavior, authorization, idempotency, and versioning where relevant. Specify observable behavior and ownership at HLD depth. Do not default to REST or a particular protocol without considering existing contracts and the use case.
 
-State your assumptions explicitly. Numbers don't need to be perfect — they need to inform decisions.
+### 6. Hard tradeoffs
 
----
+Pick the bottlenecks or contested decisions that matter in this design. Compare realistic alternatives with their costs, failure behavior, and effect on future change. Research unfamiliar options before recommending one. Skip generic deep dives that do not change a decision.
 
-### Phase 3: High-Level Components (10 min)
+### 7. Failure modes and synthesis
 
-Draw the system as boxes and arrows. For each component, state its role and why it exists.
+Walk the critical paths through dependency failure, partial completion, overload, stale data, and recovery as applicable. Identify detection, containment, and recovery at the component level. Reconcile the design with all hard constraints and summarize the chosen tradeoffs. Surface unresolved decisions instead of hiding them.
 
-**Standard components to consider:**
+## Result
 
-```
-[Clients] -> [CDN] -> [Load Balancer] -> [API Gateway]
-                                              |
-                          +---------+---------+---------+
-                          |         |                   |
-                     [Service A] [Service B]       [Service C]
-                          |         |                   |
-                     [Cache]   [Message Queue]    [Search Index]
-                          |         |                   |
-                     [Primary DB] [Worker]         [Object Store]
-                          |
-                     [Read Replica]
-```
-
-For each service/component, explain:
-- What it does (single responsibility)
-- Why it's separate (coupling, scaling, failure isolation)
-- Technology choice with brief rationale
-
-**Common patterns:**
-- Stateless API servers behind a load balancer (horizontal scaling)
-- CDN for static assets and geographic distribution
-- Message queue to decouple async work from request path
-- Read replicas to offload read traffic from primary
-- Cache layer (Redis) for hot reads
-
----
-
-### Phase 4: Data Model (5 min)
-
-Define the core entities and relationships before writing APIs.
-
-For each entity:
-- Fields (name, type, constraints)
-- Primary key strategy (UUID, auto-increment, composite)
-- Indexes needed for query patterns
-- Embed vs reference decision (if document store)
-
-**Access pattern analysis:**
-```
-Query: "Get user by email" -> Index on email (unique)
-Query: "Get posts by user, sorted by time" -> Composite index (user_id, created_at DESC)
-Query: "Get all comments for a post" -> Index on post_id
-```
-
-State the dominant query patterns first, then design the schema to serve them.
-
----
-
-### Phase 5: API Design (5 min)
-
-Define the external contract. Use REST unless there's a specific reason for GraphQL or gRPC.
-
-For each endpoint:
-```
-POST /api/v1/users
-Authorization: Bearer <token>
-Request:  { email, password, displayName }
-Response: { id, email, displayName, createdAt }
-Errors:   400 (validation), 409 (email taken), 500 (server error)
-```
-
-Include:
-- Versioning strategy (URL path `/v1/` is simplest)
-- Auth mechanism (JWT Bearer, API key, OAuth2)
-- Pagination (cursor-based for large/real-time sets, offset for admin views)
-- Rate limiting (429 Too Many Requests, include Retry-After header)
-- Idempotency keys for write operations that must not double-execute
-
----
-
-### Phase 6: Deep Dives (10 min)
-
-Pick 2-3 hardest sub-problems and solve them in detail. Common picks:
-
-**Feed generation:**
-- Fan-out on write (push) vs fan-out on read (pull)
-- Hybrid: push for normal users, pull for celebrities with 10M+ followers
-
-**Search:**
-- Inverted index (Elasticsearch) vs full-text in PostgreSQL (pg_trgm)
-- Tokenization, stemming, ranking (BM25 vs vector embeddings)
-
-**Notifications (real-time):**
-- WebSockets vs Server-Sent Events vs long polling
-- Fanout: who gets notified and when
-
-**Media upload:**
-- Pre-signed S3 URLs (client uploads directly, bypasses your servers)
-- Async transcoding via message queue after upload
-
-**Distributed rate limiting:**
-- Token bucket in Redis with atomic Lua script
-- Sliding window log vs fixed window counter tradeoffs
-
----
-
-### Phase 7: Failure Modes (5 min)
-
-Enumerate what can fail and how the system handles it.
-
-| Component | Failure | Detection | Recovery |
-|-----------|---------|-----------|----------|
-| Primary DB | Crash | Health check + replica lag monitor | Promote replica, update DNS (< 30s) |
-| Cache (Redis) | Eviction / miss | Cache hit rate metric | Serve from DB, warm cache async |
-| Message queue | Consumer lag | Queue depth metric > threshold | Scale consumers, alert |
-| External API | Timeout / 5xx | Circuit breaker (half-open after 30s) | Fallback response or queue for retry |
-| API server | Memory leak | RSS growth + OOM kill | Horizontal scaling + auto-restart |
-
-**For each failure: detection -> recovery -> prevention**
-
-Also address:
-- Data consistency on partial writes (idempotency, sagas)
-- Split-brain scenarios (for distributed state)
-- Thundering herd on cache miss (probabilistic early expiration, mutex lock)
-
----
-
-### Output Format
-
-```
-## System Design: [System Name]
-
-### Requirements
-**Functional:** ...
-**Non-functional:** ...
-**Out of scope:** ...
-
-### Capacity Estimates
-| Metric | Calculation | Result |
-|--------|-------------|--------|
-
-### Architecture Diagram
-[ASCII or Mermaid diagram]
-
-### Component Breakdown
-| Component | Role | Technology | Rationale |
-
-### Data Model
-[Schema with fields, indexes, relationships]
-
-### API Contract
-[Key endpoints with request/response]
-
-### Deep Dives
-[2-3 detailed sub-problems solved]
-
-### Failure Modes
-[Table: component, failure, detection, recovery]
-
-### Tradeoffs
-[3-5 explicit tradeoffs made in this design]
-```
+Present an HLD that reflects the resolved conversation: requirements and constraints, assumptions and scale estimates, architecture diagram and component ownership, data and external boundaries, key tradeoffs, failure and recovery behavior, and any open questions. Keep rationale close to the decision it supports. Ask the user to review the final HLD; only their explicit approval in the current chat qualifies it as approved for a subsequent LLD workflow.

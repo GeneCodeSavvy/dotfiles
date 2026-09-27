@@ -22,10 +22,8 @@ This protocol applies to every repository and every task involving codebase disc
 Before reading repository files or running any filesystem search command:
 1. Check whether `codebase-memory-mcp` tools are currently callable.
 2. !! If they are deferred or not visible, load deferred tools first !!
-3. Call `list_projects`.
-4. Select the project only from the returned project list. Never infer or guess
    an indexed project identifier from the repository path or name.
-5. State briefly which indexed project was selected.
+3. State briefly which indexed project was selected.
 
 !! Do not run `rg`, `grep`, `find`, globbing, directory enumeration, broad file reads, or speculative source reads before completing this preflight !!
 
