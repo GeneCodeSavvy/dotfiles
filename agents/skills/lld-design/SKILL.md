@@ -34,6 +34,6 @@ Compare only genuine design alternatives. Prefer the option with lower perceived
 
 ## Publish and finish
 
-Write the LLD to a temporary Markdown file, then post its contents as a comment on the matching or newly created GitHub issue. Present the design and issue link in chat. After feedback, post each revision as a new issue comment so the discussion preserves its history.
+Write the LLD to a temporary Markdown file, then post its contents as a comment on the matching or newly created GitHub issue with the "pr" skill. Present the design and issue link in chat. After feedback, post each revision as a new issue comment so the discussion preserves its history.
 
 The LLD is complete when all open design questions have answers and the posted design reflects them. A separate LLD approval is not required.
