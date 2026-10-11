@@ -11,27 +11,23 @@ $line_break\
 $character"""
 
 [directory]
-# Saffron Gold - matching the jewelry and the sun
-style = "bold #E9C46A"
+style = "bold #118dc3"
 format = "[$path]($style) "
 truncation_length = 3
 
 [character]
-# Success: Lotus Pink (#D1495B) | Error: Muted Earth (#6D597A)
-success_symbol = "[❯](bold #D1495B)"
-error_symbol = "[❯](bold #6D597A)"
-vimcmd_symbol = "[❮](bold #8A9A5B)"
+success_symbol = "[❯](bold #9a77cf)"
+error_symbol = "[❯](bold #e05661)"
+vimcmd_symbol = "[❮](bold #2d8a22)"
 
 [git_branch]
-# Sage Green - matching the draped cloth/saree
 format = "on [$symbol$branch]($style) "
 symbol = "󰊢 "
-style = "bold #8A9A5B"
+style = "bold #2d8a22"
 
 [git_status]
-# Keeps your clean logic but uses a muted Parchment color
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bold #EAD8C0) ($ahead_behind$stashed)]($style)"
-style = "italic #EAD8C0"
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bold #e05661) ($ahead_behind$stashed)]($style)"
+style = "italic #118dc3"
 conflicted = "​"
 untracked = "​"
 modified = "​"
@@ -45,14 +41,12 @@ format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
 [cmd_duration]
-# Muted Sand color so it doesn't distract
 format = "took [$duration]($style) "
-style = "#9A8C73"
+style = "#5c6370"
 
 [python]
-# Using the Sage Green for environments
 format = "via [󱔎 $virtualenv]($style) "
-style = "#8A9A5B"
+style = "#2d8a22"
 
 [line_break]
 disabled = false
@@ -61,4 +55,4 @@ disabled = false
 command = "printf %s \"$NIX_SHELL_NAME\""
 when = "test -n \"$NIX_SHELL_NAME\""
 format = "via [󱄅 $output]($style) "
-style = "#8A9A5B"
+style = "#2d8a22"
