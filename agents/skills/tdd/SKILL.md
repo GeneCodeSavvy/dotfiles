@@ -7,6 +7,24 @@ description: Test-driven development. Use when the user wants to build features 
 
 TDD is the chunk-based red → green loop: a bounded set of tests reaches verified red before its implementation begins. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
 
+## Required project testing policy
+
+Before selecting seams, planning chunks, or writing tests, locate and read the
+active project's local `testing-policy` skill. Use the project's skill catalog
+or agent instructions; the conventional location is
+`.agents/skills/testing-policy/SKILL.md` under the project root. Resolve it from
+the active project, never from the global skill directory or another checkout.
+
+The local skill governs test scope, risk priorities, fixture/harness choices and
+project checks, including overrides of this skill's generic testing examples and
+mocking defaults. This skill governs the red → green workflow. Carry the selected
+policy path and relevant constraints into test-author, implementer and reviewer
+handoffs.
+
+If no local testing-policy skill exists or it cannot be read, stop test planning
+and report the missing prerequisite. Ask for a project policy to be supplied or
+created; do not invent one or silently use generic defaults.
+
 When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
 
 ## What a good test is
