@@ -1,0 +1,26 @@
+# Colors - https://github.com/olimorris/onedarkpro.nvim
+# Terminal palette contrast-tuned for a light background.
+# Hues stay OneLight; black/white/fg are darkened so text reads.
+
+palette = 0=#383a42
+palette = 1=#e05661
+palette = 2=#2d8a22
+palette = 3=#c18401
+palette = 4=#118dc3
+palette = 5=#9a77cf
+palette = 6=#2b8f9a
+palette = 7=#9b9fa6
+palette = 8=#5c6370
+palette = 9=#e05661
+palette = 10=#2d8a22
+palette = 11=#c18401
+palette = 12=#118dc3
+palette = 13=#9a77cf
+palette = 14=#2b8f9a
+palette = 15=#383a42
+background = #fafafa
+foreground = #383a42
+cursor-color = #9a77cf
+cursor-text = #fafafa
+selection-background = #e6dcf4
+selection-foreground = #383a42
