@@ -20,17 +20,17 @@ remaining_days() {
     if (( DAYS_REMAINING < 0 )); then DAYS_REMAINING=0; fi
 
     # === Color & Style Definitions ===
-    # These use Hex codes for that precise "Lotus/Terracotta" look
-    local GOLD='\e[38;2;233;196;106m'
-    local SAGE='\e[38;2;138;154;91m'
-    local LOTUS='\e[3;38;2;209;73;91m' # The '3' triggers the Handwriting Italics
+    # Keys stay lifted; quote red and date green use the contrast-tuned palette
+    local GOLD='\e[38;2;196;154;58m'     # #c49a3a
+    local SAGE='\e[38;2;45;138;34m'      # #2d8a22
+    local LOTUS='\e[3;38;2;224;86;97m'   # italic #e05661
     local RESET='\e[0m'
-    local DIM='\e[2;38;2;234;216;192m'
+    local DIM='\e[38;2;122;129;140m'     # #7a818c
 
     # === The Output ===
     echo "" # Leading breath
     # Quote Section (Handwritten Style)
-    printf "${LOTUS}  \"Real Men, produce more than they consume.\"${RESET}\n"
+    printf "${LOTUS}  Real Men, produce more than they consume.${RESET}\n"
     printf "${LOTUS}  Let's get to work. All the best.${RESET}\n"
     
     echo "" # Spacing
@@ -44,7 +44,7 @@ remaining_days() {
 # Execution
 clear
 fastfetch
-remaining_days "2026-06-30"
+remaining_days "2026-10-16"
 
 
 # Set the directory to store Zinit and plugins
