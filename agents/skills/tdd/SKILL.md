@@ -5,7 +5,7 @@ description: Test-driven development. Use when the user wants to build features 
 
 # Test-Driven Development
 
-TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
+TDD is the chunk-based red → green loop: a bounded set of tests reaches verified red before its implementation begins. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
 
 When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
 
@@ -29,10 +29,60 @@ When the shape of that interface is itself in question (how deep the module is, 
 
 - **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
 - **Tautological**: the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, the spec.
-- **Horizontal slicing**: writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead: one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
+- **Unbounded test batches**: writing a whole ticket's tests before learning from implementation. Partition the ticket into at most three coherent chunks, then take each chunk from tests to green. Dependent chunks use what predecessor chunks established.
+
+## Plan bounded chunks
+
+The planner defines at most three chunks per ticket. Each chunk names its observable
+behavior, methods affected, approved public seams, prerequisites, edit ownership,
+and focused checks. Define test scenarios, inputs, independent expected results,
+and intended failures; leave executable test code to the test author.
+
+Use at most three meaningful behavioral cases per method being implemented across
+the ticket, counting parameterized cases separately. This is a ceiling, not a
+quota or a requirement to test private methods directly. Map cases to methods
+through approved public seams. Prefer the required result and the most important
+failure boundaries. If three cases cannot cover material responsibilities, flag
+that before dispatch: simplify the method or obtain an explicit exception. Keep
+existing valuable tests; the ceiling does not authorize deleting regression coverage.
 
 ## Rules of the loop
 
-- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
-- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
-- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.
+1. **Prepare the interface.** If an approved public interface is absent, stop for
+   a separately scoped scaffold containing signatures and minimal placeholders,
+   with no working behavior. Record the scaffold separately. Behavioral tests
+   must compile and execute before red can be accepted.
+2. **Write the chunk's tests.** A test-only author writes the planned tests,
+   fixtures, and approved harness changes, then stops. Production behavior stays
+   unchanged. Use independent expected outputs and validate external fixtures
+   through the applicable domain contract before counting their failures.
+3. **Verify red.** The orchestrator inspects the test diff, runs focused tests,
+   verifies intended behavioral failures, confirms production files are unchanged
+   from the post-scaffold baseline, and records test-file hashes. Compiler errors,
+   invalid fixtures, and tooling failures require test/harness repair first.
+   Already-green tests are characterization: reassess the production work and
+   require a valid behavioral failure for every new behavior to be implemented.
+4. **Hand off to green.** A fresh production implementer receives the accepted
+   tests and red evidence, and makes the smallest implementation that passes the
+   chunk. Tests and their supporting fixtures/harness stay fixed. A disputed test
+   returns to its author for repair and another red gate before implementation
+   resumes; use a fresh test-only author if the original is unavailable. Record
+   any intervening production edits so a new failure is not mistaken for original
+   test-first evidence.
+5. **Integrate and review.** Finish dependent chunks in order; independent chunks
+   may proceed concurrently only with independent prerequisites and disjoint edit
+   ownership. Run combined ticket checks after all chunks are green, then perform
+   independent review. Refactoring belongs to review, outside the red → green cycle.
+
+Behavioral repairs use the same test-author → verified red → fresh production
+implementer handoff. An existing failing behavioral test can supply red without
+another test. Mechanical repairs, such as formatting, can go directly to an
+implementer and receive fresh review afterward. Behavior-preserving work records
+characterization or source-equivalence evidence instead of manufactured red.
+
+Retain each chunk's test-author and production-implementer identities, baseline,
+scaffold, cases, fixture validity, exact commands, observed failures, test hashes,
+and green results. Implementation-before-test remains a chronology deviation;
+reconstructed red proves regression sensitivity, not original test-first work.
+The invoking orchestrator owns dispatch and evidence storage. Missing required
+red evidence blocks dependent production dispatch and acceptance.

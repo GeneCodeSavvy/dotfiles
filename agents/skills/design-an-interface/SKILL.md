@@ -23,7 +23,7 @@ Ask: "What does this module need to do? Who will use it?"
 
 ### 2. Generate Designs (Parallel Sub-Agents)
 
-Spawn 3+ sub-agents simultaneously using Task tool. Each must produce a **radically different** approach.
+Spawn 3 sub-agents simultaneously. Each must produce a **radically different** approach.
 
 ```
 Prompt template for each sub-agent:
