@@ -24,6 +24,7 @@ return {
 						config = function()
 							require("luasnip").filetype_extend("javascriptreact", { "html" })
 							require("luasnip").filetype_extend("typescriptreact", { "html" })
+							require("luasnip").filetype_extend("svelte", { "html", "javascript", "css" })
 							require("luasnip.loaders.from_vscode").lazy_load()
 						end,
 					},

@@ -222,6 +222,24 @@ return {
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+			-- Lets ts_ls resolve symbols from .svelte files in JS/TS buffers.
+			-- Requires svelte-language-server (mason installs the plugin as a dependency).
+			local svelte_ts_plugin = vim.fn.stdpath("data")
+				.. "/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin"
+			local ts_ls = {
+				filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+			}
+			if vim.uv.fs_stat(svelte_ts_plugin) then
+				ts_ls.init_options = {
+					plugins = {
+						{
+							name = "typescript-svelte-plugin",
+							location = svelte_ts_plugin,
+						},
+					},
+				}
+			end
+
 			local servers = {
 				-- ruff = {
 				-- 	init_options = {
@@ -263,9 +281,16 @@ return {
 						},
 					},
 				},
-				ts_ls = { filetypes = {  "typescript", "typescriptreact", "javascript", "javascriptreact" }  },
+				ts_ls = ts_ls,
+				svelte = {
+					capabilities = {
+						workspace = {
+							didChangeWatchedFiles = { dynamicRegistration = true },
+						},
+					},
+				},
 				tailwindcss = {
-					filetypes = { "html", "css", "typescriptreact", "javascriptreact" },
+					filetypes = { "html", "css", "svelte", "typescriptreact", "javascriptreact" },
 				},
 				html = {
 					filetypes = { "html" },
@@ -321,6 +346,7 @@ return {
 				"stylua", -- Used to format Lua code
 				"biome",
 				"djlint", -- Added for jinja_lsp and djlint linting/formatting
+				"prettier", -- Used for JS/TS/Svelte formatting
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
