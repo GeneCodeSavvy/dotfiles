@@ -83,22 +83,28 @@ return {
 					--  completions whenever it has completion options available.
 					["<C-Space>"] = cmp.mapping.complete({}),
 
-					-- Think of <c-l> as moving to the right of your snippet expansion.
-					--  So if you have a snippet that's like:
+					-- Jump snippet placeholders with <C-n> / <C-p> (next / previous).
+					--  Ghostty already uses <C-h/j/k/l> for splits, so those are left alone.
+					--  If you have a snippet like:
 					--  function $name($args)
 					--    $body
 					--  end
 					--
-					-- <c-l> will move you to the right of each of the expansion locations.
-					-- <c-h> is similar, except moving you backwards.
-					["<C-l>"] = cmp.mapping(function()
+					-- <C-n> moves forward through $name → $args → $body.
+					-- <C-p> moves backward. Outside a snippet, the keys fall through
+					-- to cmp's default next/prev item (or native <C-n>/<C-p>).
+					["<C-n>"] = cmp.mapping(function(fallback)
 						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
+						else
+							fallback()
 						end
 					end, { "i", "s" }),
-					["<C-h>"] = cmp.mapping(function()
+					["<C-p>"] = cmp.mapping(function(fallback)
 						if luasnip.locally_jumpable(-1) then
 							luasnip.jump(-1)
+						else
+							fallback()
 						end
 					end, { "i", "s" }),
 

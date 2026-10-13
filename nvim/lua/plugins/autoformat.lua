@@ -78,6 +78,21 @@ return {
 				json = { "biome" },
 				html = { "htmlbeautifier" },
 				jinja = { "djlint" },
+				markdown = { "injected" },
+			},
+
+			formatters = {
+				injected = {
+					options = {
+						-- One broken fence must not abort the rest.
+						ignore_errors = true,
+						lang_to_ft = {
+							bash = "sh",
+							tsx = "typescriptreact",
+							jsx = "javascriptreact",
+						},
+					},
+				},
 			},
 		},
 	},
