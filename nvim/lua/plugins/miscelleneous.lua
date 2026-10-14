@@ -27,6 +27,24 @@ return { -- Collection of various small independent plugins/modules
 			return "%2l:%-2v"
 		end
 
+		require("token_count").setup()
+		local orig_fileinfo = statusline.section_fileinfo
+		---@diagnostic disable-next-line: duplicate-set-field
+		statusline.section_fileinfo = function(args)
+			local info = orig_fileinfo(args)
+			if MiniStatusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
+				return info
+			end
+			local tokens = require("token_count").get()
+			if tokens == "" then
+				return info
+			end
+			if info == "" then
+				return tokens
+			end
+			return info .. " " .. tokens
+		end
+
 		-- ... and there is more!
 		--  Check out: https://github.com/echasnovski/mini.nvim
 	end,

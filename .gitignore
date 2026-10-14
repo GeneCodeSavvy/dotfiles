@@ -23,3 +23,5 @@ jgit
 /tokscale/cache
 /tokscale/codex-credentials.json
 /tokscale/codex-credentials.lock
+/colab-cli/history
+/colab-cli
