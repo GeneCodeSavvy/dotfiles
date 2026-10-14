@@ -1,0 +1,14 @@
+{
+	"svelte-script-tag-ts": {
+		"prefix": "s-script",
+		"body": [
+			"<script lang=\"ts\">",
+			"\t${1:// your script goes here}",
+			"</script>"
+		],
+		"description": "add a typescript script to your svelte file",
+		"luasnip": {
+			"priority": 2000
+		}
+	}
+}

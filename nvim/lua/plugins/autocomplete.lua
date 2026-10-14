@@ -22,10 +22,28 @@ return {
 					{
 						"rafamadriz/friendly-snippets",
 						config = function()
-							require("luasnip").filetype_extend("javascriptreact", { "html" })
-							require("luasnip").filetype_extend("typescriptreact", { "html" })
-							require("luasnip").filetype_extend("svelte", { "html", "javascript", "css" })
+							local ls = require("luasnip")
+							ls.filetype_extend("javascriptreact", { "html" })
+							ls.filetype_extend("typescriptreact", { "html" })
+							ls.filetype_extend("svelte", { "html", "javascript", "css" })
 							require("luasnip.loaders.from_vscode").lazy_load()
+							require("luasnip.loaders.from_vscode").lazy_load({
+								paths = { vim.fn.stdpath("config") .. "/snippets" },
+							})
+
+							-- Hide friendly-snippets' JS s-script so only the TS override appears.
+							vim.api.nvim_create_autocmd("FileType", {
+								pattern = "svelte",
+								callback = function()
+									vim.schedule(function()
+										for _, snip in ipairs(ls.get_snippets("svelte")) do
+											if snip.trigger == "s-script" and snip.name == "svelte-script-tag" then
+												snip.hidden = true
+											end
+										end
+									end)
+								end,
+							})
 						end,
 					},
 				},
