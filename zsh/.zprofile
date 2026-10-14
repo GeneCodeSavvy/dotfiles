@@ -27,6 +27,10 @@ path=(
   # Coursier
   "$HOME/Library/Application Support/Coursier/bin"
 
+  # uv tool
+  "/Users/harshsharma/.local/bin"
+
+
   # Preserve whatever was already in PATH
   $path
 )
