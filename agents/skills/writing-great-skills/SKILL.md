@@ -50,6 +50,19 @@ Where the ladder decides _how far down_ a piece sits, **co-location** decides _w
 - **By invocation** — split off a **model-invoked** skill when you have a distinct **leading word** that should trigger it on its own, or another skill must reach it. You pay **context load** for the new always-loaded **description**, so that independent reach has to be worth it.
 - **By sequence** — split a run of **steps** when the steps still ahead (a step's **post-completion steps**) tempt the agent to rush the one in front of it (**premature completion**). Keeping them out of view encourages the agent to do more **legwork** on the current task.
 
+## Checking token budgets
+
+When a task sets a token budget, use [check_tokens.py](scripts/check_tokens.py)
+to count the full UTF-8 file, including frontmatter, with tiktoken `o200k_base`:
+
+```sh
+uv run --with tiktoken python <writing-great-skills-dir>/scripts/check_tokens.py <file> --max <limit>
+```
+
+Exit 0 means the count is within the inclusive limit; exit 1 means it exceeds it.
+For “fewer than 500 tokens,” use `--max 499`. This is an explicit counting
+convention, not a claim about every model's tokenizer. The caller sets the budget.
+
 ## Pruning
 
 Keep each meaning in a **single source of truth**: one authoritative place, so changing the behaviour is a one-place edit.
