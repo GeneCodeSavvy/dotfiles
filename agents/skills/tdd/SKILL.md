@@ -5,102 +5,39 @@ description: Test-driven development. Use when the user wants to build features 
 
 # Test-Driven Development
 
-TDD is the chunk-based red → green loop: a bounded set of tests reaches verified red before its implementation begins. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
+TDD is the red → green loop: one behavioral test, verified red, then the smallest implementation that passes. Each cycle informs the next.
 
-## Required project testing policy
+## Project policy and references
 
-Before selecting seams, planning chunks, or writing tests, locate and read the
-active project's local `testing-policy` skill. Use the project's skill catalog
-or agent instructions; the conventional location is
-`.agents/skills/testing-policy/SKILL.md` under the project root. Resolve it from
-the active project, never from the global skill directory or another checkout.
+Before selecting seams or designing tests, read the active project's local `testing-policy` skill, conventionally `.agents/skills/testing-policy/SKILL.md`. Resolve it through the project's skill catalog or agent instructions. If missing or unreadable, stop test planning and ask for the policy to be supplied or created.
 
-The local skill governs test scope, risk priorities, fixture/harness choices and
-project checks, including overrides of this skill's generic testing examples and
-mocking defaults. This skill governs the red → green workflow. Carry the selected
-policy path and relevant constraints into test-author, implementer and reviewer
-handoffs.
+The project policy owns test scope, public/private boundary exceptions, harness choices and checks; it overrides generic testing advice. Explicit TDD still requires red before green. The invoking workflow owns any agent separation, dispatch and evidence storage requirements.
 
-If no local testing-policy skill exists or it cannot be read, stop test planning
-and report the missing prerequisite. Ask for a project policy to be supplied or
-created; do not invent one or silently use generic defaults.
+Read [test-quality.md](test-quality.md) before designing tests and during review. When authoring tests, read the relevant [TypeScript/JavaScript](patterns/typescript-javascript.md) or [Rust](patterns/rust.md) reference if its language-specific guidance applies. Follow the project's existing framework and harness.
 
-When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
+When exploring the codebase, read the relevant `GLOSSARY.md` if present and respect ADRs in the affected area.
 
 ## What a good test is
 
-Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification: "user can checkout with valid cart" tells you exactly what capability exists, and it survives refactors because it doesn't care about internal structure.
-
-See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
+Tests verify observable behavior through public interfaces. A good test reads like a specification and survives internal refactoring. Expected values come from an independent source: a known literal, worked example or specification.
 
 ## Seams: where tests go
 
-A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
+A **seam** is the public boundary where behavior is observed. Record each proposed seam and what it catches and misses. Reuse approval from the user's task or accepted plan; confirm new or changed boundaries with the user before writing tests there.
 
-**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
-
-Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
-
-When the shape of that interface is itself in question (how deep the module is, where the seam belongs, what the interface should expose), call the Skill tool with "codebase-design" for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
+When the interface shape or seam is undecided, consult `codebase-design` for the shared module and interface vocabulary.
 
 ## Anti-patterns
 
-- **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
-- **Tautological**: the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, the spec.
-- **Unbounded test batches**: writing a whole ticket's tests before learning from implementation. Partition the ticket into at most three coherent chunks, then take each chunk from tests to green. Dependent chunks use what predecessor chunks established.
-
-## Plan bounded chunks
-
-The planner defines at most three chunks per ticket. Each chunk names its observable
-behavior, methods affected, approved public seams, prerequisites, edit ownership,
-and focused checks. Define test scenarios, inputs, independent expected results,
-and intended failures; leave executable test code to the test author.
-
-Use at most three meaningful behavioral cases per method being implemented across
-the ticket, counting parameterized cases separately. This is a ceiling, not a
-quota or a requirement to test private methods directly. Map cases to methods
-through approved public seams. Prefer the required result and the most important
-failure boundaries. If three cases cannot cover material responsibilities, flag
-that before dispatch: simplify the method or obtain an explicit exception. Keep
-existing valuable tests; the ceiling does not authorize deleting regression coverage.
+- **Implementation-coupled:** assertions depend on internal structure rather than the promised outcome.
+- **Tautological:** expected values repeat production logic or assertions verify only fixture/mock configuration.
+- **Horizontal slicing:** writing a batch of tests before implementation commits to imagined behavior. Use **vertical slices**: each test is a **tracer bullet** informed by the previous cycle.
 
 ## Rules of the loop
 
-1. **Prepare the interface.** If an approved public interface is absent, stop for
-   a separately scoped scaffold containing signatures and minimal placeholders,
-   with no working behavior. Record the scaffold separately. Behavioral tests
-   must compile and execute before red can be accepted.
-2. **Write the chunk's tests.** A test-only author writes the planned tests,
-   fixtures, and approved harness changes, then stops. Production behavior stays
-   unchanged. Use independent expected outputs and validate external fixtures
-   through the applicable domain contract before counting their failures.
-3. **Verify red.** The orchestrator inspects the test diff, runs focused tests,
-   verifies intended behavioral failures, confirms production files are unchanged
-   from the post-scaffold baseline, and records test-file hashes. Compiler errors,
-   invalid fixtures, and tooling failures require test/harness repair first.
-   Already-green tests are characterization: reassess the production work and
-   require a valid behavioral failure for every new behavior to be implemented.
-4. **Hand off to green.** A fresh production implementer receives the accepted
-   tests and red evidence, and makes the smallest implementation that passes the
-   chunk. Tests and their supporting fixtures/harness stay fixed. A disputed test
-   returns to its author for repair and another red gate before implementation
-   resumes; use a fresh test-only author if the original is unavailable. Record
-   any intervening production edits so a new failure is not mistaken for original
-   test-first evidence.
-5. **Integrate and review.** Finish dependent chunks in order; independent chunks
-   may proceed concurrently only with independent prerequisites and disjoint edit
-   ownership. Run combined ticket checks after all chunks are green, then perform
-   independent review. Refactoring belongs to review, outside the red → green cycle.
-
-Behavioral repairs use the same test-author → verified red → fresh production
-implementer handoff. An existing failing behavioral test can supply red without
-another test. Mechanical repairs, such as formatting, can go directly to an
-implementer and receive fresh review afterward. Behavior-preserving work records
-characterization or source-equivalence evidence instead of manufactured red.
-
-Retain each chunk's test-author and production-implementer identities, baseline,
-scaffold, cases, fixture validity, exact commands, observed failures, test hashes,
-and green results. Implementation-before-test remains a chronology deviation;
-reconstructed red proves regression sensitivity, not original test-first work.
-The invoking orchestrator owns dispatch and evidence storage. Missing required
-red evidence blocks dependent production dispatch and acceptance.
+- **Prepare the interface.** If absent, add only the approved signatures and minimal placeholders needed to execute the test. Identify scaffolding separately from working behavior.
+- **One slice at a time.** Write one test for one observable behavior. Several related assertions or public interfaces may establish that behavior. Let project policy determine sufficient coverage.
+- **Verify red before green.** Run the focused test and observe its intended behavioral failure before implementing. Compiler errors, broken fixtures and tooling failures require repair; they are not red. Validate serialized external fixtures against their applicable contract.
+- **Implement minimally.** Add the smallest coherent implementation that passes, then run the focused checks. Keep accepted test expectations intact; anticipate no future tests or speculative features.
+- **Handle exceptions honestly.** An existing failing behavioral test can supply red. Already-green tests are characterization; reassess the needed change rather than manufacture failure. Correct defective or disputed tests openly and verify behavioral red again before continuing implementation. Reconstructed red proves regression sensitivity, not original test-first chronology.
+- **Review after green.** Run the project checks appropriate to the combined change and report focused commands and red/green results. Structural refactoring belongs to review (see `code-review`), outside the red → green cycle; rerun affected checks after review changes.
