@@ -11,7 +11,7 @@ Make the task deeper, not bigger. Replace shallow treatment with the professiona
 
 Use the prompt supplied with this invocation, or the task it clearly refers to in the conversation. If neither identifies a task, ask for the prompt and stop.
 
-Identify its intended outcome, subject, deliverable, and explicit constraints. Preserve these as the scope boundary. When context leaves a consequential choice open, state a narrow assumption; ask only when different answers would change the task itself. use *"grilling"* to clarify the intent if gaps remains.
+Identify its intended outcome, subject, deliverable, and explicit constraints. Preserve these as the scope boundary. When context leaves a consequential choice open, state a narrow assumption; ask only when different answers would change the task itself. use *"grilling"* to clarify the intent if gaps remains; use *codebase-memory-mcp* to explore the codebase.
 
 Done when you can distinguish a deeper treatment of the requested result from an additional assignment.
 
