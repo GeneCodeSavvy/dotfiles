@@ -22,11 +22,11 @@ let
 
   open-code-review = pkgs.stdenvNoCC.mkDerivation {
     pname = "open-code-review";
-    version = "1.6.6";
+    version = "1.11.5";
 
     src = pkgs.fetchurl {
-      url = "https://github.com/alibaba/open-code-review/releases/download/v1.6.6/opencodereview-darwin-arm64";
-      hash = "sha256-rCcewegYHsr803A3sQTVMNOwS6JYVGP4JHwjaVNOCNA=";
+      url = "https://github.com/alibaba/open-code-review/releases/download/v1.11.5/opencodereview-darwin-arm64";
+      hash = "sha256:c041b03cc840957b52df28514e8dbb51f798e6cb1259d97555a41a2e3e3ccaf9";
     };
 
     dontUnpack = true;
@@ -38,13 +38,35 @@ let
     '';
   };
 
-  codebase-memory-mcp = pkgs.stdenvNoCC.mkDerivation {
-    pname = "codebase-memory-mcp";
-    version = "0.8.1";
+  opencode-cli = pkgs.stdenvNoCC.mkDerivation {
+    pname = "opencode-cli";
+    version = "1.18.29";
 
     src = pkgs.fetchurl {
-      url = "https://github.com/DeusData/codebase-memory-mcp/releases/download/v0.9.0/codebase-memory-mcp-darwin-arm64.tar.gz";
-      hash = "sha256:faa02f0404230c451a9812230394481948f80183801fa5bf67044b41c2f25ed4";
+      url = "https://github.com/anomalyco/opencode/releases/download/v1.18.29/opencode-darwin-arm64.zip";
+      sha256 = "sha256-/nZPfzYMWEqD4Y3V8j+xprJyX17ohUsCUv5Vj3eY6UY=";
+    };
+
+    nativeBuildInputs = [ pkgs.unzip ];
+
+    sourceRoot = ".";
+
+    installPhase = ''
+      runHook preInstall
+      install -Dm755 opencode "$out/bin/opencode"
+      runHook postInstall
+    '';
+  };
+
+  superseedr = pkgs.callPackage ./pkgs/superseedr.nix { };
+
+  codebase-memory-mcp = pkgs.stdenvNoCC.mkDerivation {
+    pname = "codebase-memory-mcp";
+    version = "0.11.0";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/DeusData/codebase-memory-mcp/releases/download/v0.11.0/codebase-memory-mcp-darwin-arm64.tar.gz";
+      hash = "sha256:4dee7f38b63740e6751d7a7ed7eb10291c1f2a3ea2415f599dc68370ca0a2d18";
     };
 
     sourceRoot = ".";
@@ -108,20 +130,11 @@ in
     mongosh
     mutagen
     ninja
-    nodejs_22
+    nodejs_24
     ollama
-    opencode
+    opencode-cli
     open-code-review
     pandoc
-    # the pinned pipx 1.14.0 source has bugs, so the temp fix
-    (pipx.overridePythonAttrs (old: {
-      postPatch = (old.postPatch or "") + ''
-        substituteInPlace tests/test_inject.py \
-          --replace-fail '"pkg_spec,"' '"pkg_spec"' \
-          --replace-fail '"with_suffix,"' '"with_suffix"' \
-          --replace-fail '"with_packages,"' '"with_packages"'
-      '';
-    }))
     pngpaste
     pnpm
     poppler
@@ -135,10 +148,11 @@ in
     rustup
     p7zip
     starship
+    superseedr
     tcl
+    terraform
     texinfo
     tlrc
-    tmux
     tree
     tree-sitter
     unar
