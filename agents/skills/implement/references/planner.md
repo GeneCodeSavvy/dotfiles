@@ -44,6 +44,9 @@ and copy needed sections to workers. Preserve the original and revisions. Includ
   Expected failures are typed/structured outcomes. Unexpected failures retain
   diagnostic context; impossible states expose violated invariants near the cause,
   under the global engineering guidelines.
+- Implementation chunks using the fixed [chunk contract](chunk-contract.md).
+  Fill one contract per chunk, including a single-chunk issue. That template owns
+  the required symbol details, execution recipe and pre-dispatch completeness gate.
 - Exact role ownership, dependencies, protected paths, commands and acceptance-to-
   check mapping. Each abstraction, refactor, dependency and harness must serve a
   current requirement or concrete risk; defer unrelated cleanup.
@@ -69,7 +72,10 @@ preparation uses deepen.
 You author TASKs and provision directories/inputs for gardener, implementer and
 coordinator under [shared records](state.md). The coordinator does this for its
 axes. TASKs carry exact ownership, accepted contracts, source/evidence references,
-checks, resources, output paths and completion conditions. Use the
+checks, resources, output paths and completion conditions. Link implementer TASKs
+to their filled chunk contracts in execution order and apply the template's
+pre-dispatch gate. Supply other workers' applicable contracts as copied inputs.
+Use the
 [handoff skill](/Users/harshsharma/.config/agents/skills/handoff/SKILL.md) for
 handoff writing rather than a second generic template.
 
@@ -87,8 +93,10 @@ justify takeover. Native workers return reports to you, rather than attempting
 app callbacks. User-stopped agents require user authorization to resume.
 
 Create and register the coordinator with [review duties](review.md), its full TASK
-and copied inputs including initial IMPLEMENTATION_READY evidence, then
-yield. Handle its READY, requests and results as app events. Coordinator performs
+and copied inputs including initial IMPLEMENTATION_READY evidence and the exact
+chunk contract revisions used by implementers. Include origin paths, revisions,
+hashes and accepted revision decisions; preserve superseded contracts for audit.
+Then yield. Handle its READY, requests and results as app events. Coordinator performs
 its root READY/ACK handshake before review. Keep implementation workers stopped
 until you receive a bounded repair request. Root owns commits and closure.
 
@@ -108,7 +116,9 @@ contract changes return to the planner before expanding scope.
 ## Implementer TASK contract
 
 Own production implementation, tests, fixtures and proportionate harness changes.
-There is no separate test author. Read and apply
+Read the filled chunk contracts linked from TASK and follow their execution order;
+return consequential contract gaps to the planner before affected work. There is
+no separate test author. Read and apply
 [TDD](/Users/harshsharma/.config/agents/skills/tdd/SKILL.md), its applicable language
 references and local testing-policy. Complete one behavioral red → green slice at
 a time, then rerun affected checks. Reuse the existing framework and test runtime.

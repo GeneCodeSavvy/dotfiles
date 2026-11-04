@@ -19,6 +19,14 @@ the pre-implementation baseline, protected staged/dirty work, approved patch/hun
 check results and TASK revisions. Keep the manifest and full review inputs locally.
 Both axes must review that identical snapshot. Reject stale evidence after edits.
 
+Include the exact chunk contract revisions used by implementers in the frozen
+review inputs, with origin paths, revision IDs and SHA256 hashes. Reconcile them
+with TASK/ISSUE revisions, implementation reports and accepted planner decisions;
+identify the effective contract for each chunk, including approved repair changes.
+Missing contracts, revision mismatches or unresolved contradictions block review
+acceptance. Preserve superseded versions and their decision trail; review against
+the reconciled contracts rather than an unverified latest copy.
+
 For uncommitted work, adapt code-review to `git diff <baseline> -- <owned paths>`
 and read every owned untracked file in full. Use the supplied baseline/spec; do not
 rediscover them or create temporary commits. Committed comparisons retain that
@@ -29,6 +37,8 @@ blocker here; do not skip the Spec axis.
 ## Independent axes
 
 Author separate TASKs and copy inputs into fresh Standards and Spec directories.
+Supply both axes identical copies of the reconciled chunk contracts and their
+provenance manifest; each TASK requires reading them for its axis-specific use.
 Use native `gpt-6.1-sol` / `medium`, `fork_turns: "none"`, for both; no deepen.
 Record identities and revisions in your review package and send them to planner.
 Run in parallel only when capacity permits; otherwise run sequentially with independent context. Share expensive
@@ -38,6 +48,9 @@ Standards checks applicable repository/global rules, testing-policy, resulting
 file responsibilities and code-review's full smell baseline. Copy that baseline
 into its TASK as code-review requires; smells remain judgment calls and repository
 rules take precedence. Read the owning domain-review skill when applicable.
+Use chunk contracts to understand intended symbol ownership, interfaces,
+responsibilities and execution context. Standards judges compliance with rules;
+Spec owns exact matching against the contracts.
 
 Spec checks every accepted behavior and exclusion, public interface/consumer
 updates, gardener preservation, test usefulness, actual TDD phase evidence,
@@ -45,6 +58,17 @@ repairs, check outcomes and applicable conditional/domain invariants. For capabi
 boundaries, enumerate exposed mutation routes and parameter restrictions; check
 rejection/rollback through public durable-state reads. Use testing-policy to assess
 whether evidence is sufficient rather than adding hypothetical coverage.
+
+Treat the reconciled chunk contracts as specification inputs alongside the
+originating issue and accepted decisions. Check exact conformance to each
+contract's acceptance criteria, ownership, major symbol interfaces and behavior,
+state/invariants, integration, preserved behavior, execution obligations and
+verification gates. Map each obligation to source/evidence or a concrete gap in
+the Spec report, citing chunk/revision and section or symbol ID. Also check that
+the contracts cover the originating requirements; planner omissions do not reduce
+scope. Report unexplained deviations or contract/source contradictions as FIX-FIRST
+for planner resolution. Respect implementation discretion explicitly left by the
+contract; judge execution obligations from recorded evidence, not inferred chronology.
 
 Each axis returns a separate report for the frozen state. Preserve first failures,
 isolated reruns and final outcomes. Review is not permission to edit repository

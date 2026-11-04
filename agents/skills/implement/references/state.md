@@ -133,6 +133,9 @@ accepted contract, checks/resource owner, report path, stop condition and releva
 communication authority. Reference current decisions by ID. A fresh agent must be
 able to act without inherited conversation. Models and role-specific obligations
 come from [planner contracts](planner.md); root's planner TASK follows parent duties.
+Implementer TASKs link their filled [chunk contracts](chunk-contract.md) in
+execution order. These planner-authored files live in the implementer's directory
+as read-only inputs and follow the same revision/copy rules as TASK assignments.
 Only root-to-planner TASK preparation uses deepen. All other TASK authors write
 contracts directly. Scope/contract revisions go through the TASK author, with
 version changes recorded in ISSUE; bounded repairs can reuse an unchanged TASK.
