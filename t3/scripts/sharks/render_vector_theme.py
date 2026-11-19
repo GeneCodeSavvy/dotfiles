@@ -14,7 +14,7 @@ ROUTE_STRIDE = 16
 SWIM_STEPS = 8
 ANCHORS = (1, 1, -57)
 INK = "#c9c2e1"
-OUTLINE_WIDTH = 1.5
+OUTLINE_WIDTH = 0.95
 
 
 def fuller_fin(fin, index):
@@ -143,8 +143,8 @@ def vector_shark(index, design, path, heading, speed):
         + f'<defs><path id="{body_id}" d="{body_frames[0]}">'
         + animation("d", body_frames, period) + '</path></defs>'
         + f'<g fill="none" stroke="{INK}" stroke-linejoin="round">'
-        + f'<use href="#{body_id}" stroke-width="{OUTLINE_WIDTH}" opacity=".64"/>'
-        + '<g stroke-width="1.25" opacity=".54">' + outlines + '</g></g></g></g></g>'
+        + f'<use href="#{body_id}" stroke-width="{OUTLINE_WIDTH}" opacity=".43"/>'
+        + '<g stroke-width="1.05" opacity=".39">' + outlines + '</g></g></g></g></g>'
     )
 
 
