@@ -8,12 +8,25 @@ from pathlib import Path
 import numpy as np
 
 import bake
-from render_midnight_koi import ANCHORS, INK, fuller_fin
 
 CSS_LIMIT = 100_000
 ROUTE_STRIDE = 16
 SWIM_STEPS = 8
-FILL = "#" + bytes(INK).hex()
+ANCHORS = (1, 1, -57)
+INK = "#c9c2e1"
+OUTLINE_WIDTH = 1.5
+
+
+def fuller_fin(fin, index):
+    if index == 2:
+        root = np.array([-53., 0.])
+        return root + (fin - root) * [1.04, 1.23]
+    root = (fin[0] + fin[-2]) / 2
+    axis = fin[6] - root
+    axis /= np.linalg.norm(axis)
+    offset = fin - root
+    along = np.outer(offset @ axis, axis)
+    return root + 1.06 * along + 1.25 * (offset - along)
 
 
 def number(value, places=1):
@@ -30,9 +43,19 @@ def polygon(points):
     return "M" + coordinates(points) + "Z"
 
 
+def contour_controls(points):
+    tangents = (np.roll(points, -1, axis=0) - np.roll(points, 1, axis=0)) / 6
+    ends = np.roll(points, -1, axis=0)
+    return points[0] + tangents[0], ends - np.roll(tangents, -1, axis=0), ends
+
+
 def contour(points):
-    # Alternate control points and endpoints to round off the polygon corners.
-    return f"M{coordinates(points[0])}Q{coordinates(points[1:])} {coordinates(points[0])}Z"
+    first_control, incoming, ends = contour_controls(points)
+    pairs = np.column_stack((incoming, ends))
+    return (
+        f"M{coordinates(points[0])}C{coordinates(first_control)} {coordinates(pairs[0])}"
+        f"S{coordinates(pairs[1:])}Z"
+    )
 
 
 def animation(attribute, values, seconds, transform=None):
@@ -45,9 +68,8 @@ def animation(attribute, values, seconds, transform=None):
 
 def vector_shark(index, design, path, heading, speed):
     fins = [fuller_fin(np.array(fin), j) for j, fin in enumerate(design["polygons"][:3])]
-    body = np.array(design["polygons"][3])[:-1:3]
-    if len(body) % 2:
-        body = body[:-1]
+    body_outline = np.array(design["polygons"][3])
+    body = body_outline[np.linspace(0, len(body_outline), 12, endpoint=False, dtype=int)]
     closed_path = np.vstack((path, path[0]))
     closed_heading = np.rad2deg(np.unwrap(np.r_[heading, heading[0]]))
     samples = np.arange(0, bake.N + 1, ROUTE_STRIDE)
@@ -85,7 +107,6 @@ def vector_shark(index, design, path, heading, speed):
         fin_elements.append(
             '<g>' + animation("transform", positions, period, "translate")
             + '<g>' + animation("transform", angles, period, "rotate")
-            + f'<path d="{fin_path}" fill="{FILL}" opacity=".065"/>'
             + f'<path d="{fin_path}" fill="url(#specks)"/></g></g>'
         )
 
@@ -97,9 +118,17 @@ def vector_shark(index, design, path, heading, speed):
     mix = (swim % 1)[:, None, None]
     for vertices, anchor in zip([body, *fins], [None, *ANCHORS], strict=True):
         local = np.array([skin(vertices, pose, anchor) for pose in poses])
+        if anchor is None:
+            # Include the cubic control points when checking the stroked outline's bounds.
+            controls = []
+            for points in local:
+                _, incoming, ends = contour_controls(points)
+                controls.append(np.concatenate((points, incoming, 2 * ends - incoming)))
+            local = np.array(controls)
         local = (1 - mix) * local[frame] + mix * local[frame + 1]
         screen = centers[:, None, :] + scale * bake.rotate(local, rotations[:, None])
-        assert screen.min() > 2 and np.min(bake.DIMS - screen) > 2
+        stroke_margin = scale * OUTLINE_WIDTH / 2 + 1
+        assert screen.min() > stroke_margin and np.min(bake.DIMS - screen) > stroke_margin
 
     body_frames = [contour(skin(body, pose)) for pose in poses]
     body_id = f"body{index}"
@@ -111,15 +140,16 @@ def vector_shark(index, design, path, heading, speed):
         '<g>' + animation("transform", translation, bake.SECONDS, "translate")
         + '<g>' + animation("transform", rotation, bake.SECONDS, "rotate")
         + f'<g transform="scale({scale})">' + ''.join(fin_elements)
-        + f'<g fill="none" stroke="{FILL}" stroke-width=".85" opacity=".40" stroke-linejoin="round">'
-        + f'<path id="{body_id}" d="{body_frames[0]}">'
-        + animation("d", body_frames, period) + '</path>' + outlines + '</g></g></g></g>'
+        + f'<defs><path id="{body_id}" d="{body_frames[0]}">'
+        + animation("d", body_frames, period) + '</path></defs>'
+        + f'<g fill="none" stroke="{INK}" stroke-linejoin="round">'
+        + f'<use href="#{body_id}" stroke-width="{OUTLINE_WIDTH}" opacity=".64"/>'
+        + '<g stroke-width="1.25" opacity=".54">' + outlines + '</g></g></g></g></g>'
     )
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("theme", type=Path, help="Input copy of the Midnight Koi theme JSON")
     parser.add_argument("output", type=Path, help="Destination theme JSON")
     args = parser.parse_args()
 
@@ -137,18 +167,17 @@ def main():
     )
     svg = (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 710">'
-        f'<defs><pattern id="specks" patternUnits="userSpaceOnUse" width="12" height="12" fill="{FILL}">'
+        f'<defs><pattern id="specks" patternUnits="userSpaceOnUse" width="12" height="12" fill="{INK}">'
+        '<rect width="12" height="12" opacity=".065"/>'
         + specks + '</pattern></defs>'
         + ''.join(vector_shark(i, *data) for i, data in enumerate(zip(designs, paths, headings, speeds, strict=True)))
         + '</svg>'
     )
     data_url = "data:image/svg+xml;base64," + base64.b64encode(svg.encode()).decode()
-    theme = json.loads(args.theme.read_text())
-    theme["name"] = "Midnight Koi Vector"
-    assert "var(--theme-background-image)" in theme["css"]
+    theme = json.loads((bake.HERE / "midnight-koi-base.json").read_text())
     theme["css"] = (
         f':root{{--midnight-koi-sharks:url("{data_url}")}}\n'
-        + theme["css"].replace("--theme-background-image", "--midnight-koi-sharks")
+        + theme["css"]
     )
     if len(theme["css"]) > CSS_LIMIT:
         raise ValueError(f"Generated CSS exceeds the {CSS_LIMIT:,}-character theme limit")
