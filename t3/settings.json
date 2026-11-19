@@ -1,0 +1,237 @@
+{
+  "favorites": [
+    {
+      "provider": "codex",
+      "model": "gpt-6.1-sol"
+    },
+    {
+      "provider": "opencode",
+      "model": "opencode/deepseek-v4.1-flash-free"
+    },
+    {
+      "provider": "grok",
+      "model": "grok-4.6"
+    },
+    {
+      "provider": "opencode",
+      "model": "opencode/glm-5.3-flash-free"
+    },
+    {
+      "provider": "codex",
+      "model": "gpt-6.2-sol"
+    }
+  ],
+  "providerModelPreferences": {
+    "grok": {
+      "hiddenModels": [
+        "grok-build"
+      ],
+      "modelOrder": []
+    },
+    "opencode": {
+      "hiddenModels": [
+        "openrouter/aion-labs/aion-2.0",
+        "openrouter/aion-labs/aion-3.0",
+        "openrouter/aion-labs/aion-3.0-mini",
+        "openrouter/aion-labs/aion-rp-llama-3.1-8b",
+        "openrouter/~anthropic/claude-haiku-latest",
+        "openrouter/~anthropic/claude-sonnet-latest",
+        "openrouter/openrouter/auto",
+        "opencode/big-pickle",
+        "openrouter/openrouter/bodybuilder",
+        "openrouter/anthropic/claude-3-haiku",
+        "opencode/claude-fable-5",
+        "anthropic/claude-fable-5",
+        "openrouter/anthropic/claude-fable-5",
+        "openrouter/~anthropic/claude-fable-latest",
+        "opencode/claude-haiku-4-5",
+        "anthropic/claude-haiku-4-5-20251001",
+        "anthropic/claude-haiku-4-5",
+        "openrouter/anthropic/claude-haiku-4.5",
+        "opencode/claude-opus-4-1",
+        "openrouter/anthropic/claude-opus-4",
+        "openrouter/microsoft/wizardlm-2-8x22b",
+        "openrouter/mancer/weaver",
+        "openrouter/mistralai/voxtral-small-24b-2507",
+        "openrouter/arcee-ai/virtuoso-large",
+        "google/veo-3.1-lite-generate-preview",
+        "google/veo-3.1-fast-generate-preview",
+        "google/veo-3.1-generate-preview",
+        "openrouter/thedrummer/unslopnemo-12b",
+        "openrouter/cognitivecomputations/dolphin-mistral-24b-venice-edition",
+        "openrouter/bytedance/ui-tars-1.5-7b",
+        "openrouter/stepfun/step-3.7-flash",
+        "openrouter/arcee-ai/trinity-large-thinking",
+        "openrouter/stepfun/step-3.5-flash",
+        "openrouter/perplexity/sonar-reasoning-pro",
+        "openrouter/perplexity/sonar-pro-search",
+        "openrouter/perplexity/sonar-deep-research",
+        "openrouter/perplexity/sonar-pro",
+        "openrouter/perplexity/sonar",
+        "openrouter/upstage/solar-pro-3",
+        "openrouter/thedrummer/skyfall-36b-v2",
+        "openrouter/bytedance-seed/seed-2.0-mini",
+        "openrouter/bytedance-seed/seed-2.0-lite",
+        "openrouter/bytedance-seed/seed-1.6",
+        "openrouter/bytedance-seed/seed-1.6-flash",
+        "openrouter/mistralai/mistral-saba",
+        "openrouter/thedrummer/rocinante-12b",
+        "openrouter/inclusionai/ring-2.6-1t",
+        "openrouter/undi95/remm-slerp-l2-13b",
+        "openrouter/relace/relace-search",
+        "openrouter/relace/relace-apply-3",
+        "openrouter/rekaai/reka-flash-3",
+        "openrouter/rekaai/reka-edge",
+        "openrouter/deepseek/deepseek-r1-distill-llama-70b",
+        "openrouter/deepseek/deepseek-r1-0528",
+        "openrouter/qwen/qwen3.7-plus",
+        "opencode-go/qwen3.7-plus",
+        "opencode-go/qwen3.7-max",
+        "openrouter/qwen/qwen3.7-max",
+        "openrouter/qwen/qwen3.6-plus",
+        "opencode/qwen3.6-plus",
+        "opencode-go/qwen3.6-plus",
+        "openrouter/qwen/qwen3.6-max-preview",
+        "openrouter/qwen/qwen3.6-flash",
+        "openrouter/qwen/qwen3.6-35b-a3b",
+        "openrouter/qwen/qwen3.6-27b",
+        "openrouter/qwen/qwen3.5-flash-02-23",
+        "openrouter/qwen/qwen3.5-plus-20260420",
+        "openrouter/qwen/qwen3.5-plus-02-15",
+        "opencode/qwen3.5-plus",
+        "openrouter/qwen/qwen3.5-9b",
+        "openrouter/qwen/qwen3.5-35b-a3b",
+        "openrouter/qwen/qwen3.5-397b-a17b",
+        "openrouter/qwen/qwen3.5-122b-a10b",
+        "openrouter/qwen/qwen3.5-27b",
+        "openrouter/qwen/qwen3-next-80b-a3b-instruct",
+        "openrouter/qwen/qwen3-next-80b-a3b-thinking",
+        "openrouter/qwen/qwen3-coder-30b-a3b-instruct",
+        "openrouter/qwen/qwen3-vl-8b-thinking",
+        "openrouter/qwen/qwen3-vl-8b-instruct",
+        "openrouter/qwen/qwen3-vl-32b-instruct",
+        "openrouter/qwen/qwen3-vl-30b-a3b-thinking",
+        "openrouter/qwen/qwen3-vl-30b-a3b-instruct",
+        "openrouter/qwen/qwen3-vl-235b-a22b-thinking",
+        "openrouter/qwen/qwen3-vl-235b-a22b-instruct",
+        "openrouter/qwen/qwen3-max-thinking",
+        "openrouter/qwen/qwen3-max",
+        "openrouter/qwen/qwen3-coder-plus",
+        "openrouter/qwen/qwen3-coder-next",
+        "openrouter/qwen/qwen3-coder-flash",
+        "openrouter/qwen/qwen3-coder",
+        "openrouter/qwen/qwen3-8b",
+        "openrouter/qwen/qwen3-32b",
+        "openrouter/qwen/qwen3-30b-a3b-thinking-2507",
+        "openrouter/qwen/qwen3-30b-a3b-instruct-2507",
+        "openrouter/qwen/qwen3-30b-a3b",
+        "openrouter/qwen/qwen3-235b-a22b",
+        "opencode/glm-5.3-flash",
+        "opencode/beam-free",
+        "opencode/claude-haiku-5-5",
+        "opencode/claude-opus-5-5",
+        "opencode/claude-sonnet-5-5",
+        "opencode/crouton-alpha-free",
+        "opencode/deepseek-v4.1-flash",
+        "opencode/flint-40b-free",
+        "opencode/gemini-4-argon",
+        "opencode/glm-5.3",
+        "opencode/gpt-6-luna",
+        "opencode/gpt-6-sol",
+        "opencode/gpt-6.1-sol",
+        "opencode/grok-4.6",
+        "opencode/grok-4.7",
+        "opencode/kimi-k3",
+        "opencode/mimo-v2.6-flash-free",
+        "opencode/mistral-large-4",
+        "opencode/muse-wonder-1.0",
+        "opencode/nemotron-3.5-super-vl-free",
+        "opencode/pulse-alpha-free",
+        "opencode/qwen3.8-flash",
+        "opencode/qwen3.8-max",
+        "opencode/muse-ember-1.0",
+        "opencode/longcat-2.5-free",
+        "opencode/inkling-2-small-free",
+        "opencode/iceman-free",
+        "opencode/gpt-6.2-sol",
+        "opencode/gpt-6.2-astra",
+        "opencode/gemini-4-hydrogen",
+        "opencode/gemini-4-carbon",
+        "opencode/claude-fable-5-2"
+      ],
+      "modelOrder": []
+    },
+    "codex": {
+      "hiddenModels": [
+        "gpt-6-astra",
+        "gpt-6-sol",
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna",
+        "gpt-5.5",
+        "gpt-5.4",
+        "gpt-5.4-mini",
+        "gpt-6-luna",
+        "gpt-6.1-terra"
+      ],
+      "modelOrder": []
+    }
+  },
+  "projectSettingsFolded": true,
+  "idleCompaction": "onReturn",
+  "snoozeLimitedThreads": true,
+  "autoResumeLimitedThreads": true,
+  "defaultTheme": "midnight-koi",
+  "defaultThemeSetAt": "2026-11-19T10:40:37.086Z",
+  "defaultAppearance": "dark",
+  "defaultAppearanceSetAt": "2026-11-19T10:40:37.086Z",
+  "addProjectBaseDirectory": "~/Desktop/work/invello/",
+  "removeAgentCreditsOnMerge": true,
+  "pullRequestMergeMethod": "rebase",
+  "providerInstances": {
+    "claudeAgent": {
+      "driver": "claudeAgent",
+      "enabled": false,
+      "config": {
+        "binaryPath": "claude",
+        "homePath": "",
+        "customModels": [],
+        "launchArgs": ""
+      }
+    },
+    "codex": {
+      "driver": "codex",
+      "displayName": "Main",
+      "accentColor": "#0891b2",
+      "enabled": true,
+      "config": {
+        "binaryPath": "/Users/harshsharma/.npm-global/bin/codex",
+        "homePath": "",
+        "shadowHomePath": "",
+        "launchArgs": "",
+        "customModels": []
+      }
+    },
+    "opencode": {
+      "driver": "opencode",
+      "displayName": "Reviewers",
+      "accentColor": "#0891b2",
+      "enabled": true,
+      "config": {
+        "binaryPath": "/Users/harshsharma/.npm-global/bin/opencode",
+        "serverUrl": "",
+        "serverPassword": "",
+        "customModels": []
+      }
+    },
+    "grok": {
+      "driver": "grok",
+      "displayName": "Backup-Worker",
+      "enabled": true,
+      "config": {
+        "binaryPath": "/Users/harshsharma/.npm-global/bin/grok",
+        "customModels": []
+      }
+    }
+  }
+}
